@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Radar - Hotmart</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <div class="header-container">
+
+        <header class="header">
+            <h1 class="title">
+                Product Radar
+            </h1>
+
+        </header>
+        <p id="logout-btn">Deslogar</p>
+        <span id="container-hello"><p class="container-hello__text">Olá, </p></span>
+    </div>
+    <div class="main-container">
+    
+        <aside class="aside-menu">
+            <h2>Plataformas</h2>
+
+            <div class="grid-container">
+                <div class="grid-item"><img src="#" alt="Imagem 1"></div>
+                <div class="grid-item"><img src="imagem2.jpg" alt="Imagem 2"></div>
+                <div class="grid-item"><img src="imagem3.jpg" alt="Imagem 3"></div>
+                <div class="grid-item"><img src="imagem4.jpg" alt="Imagem 4"></div>
+                <div class="grid-item"><img src="imagem5.jpg" alt="Imagem 5"></div>
+                <div class="grid-item"><img src="imagem6.jpg" alt="Imagem 6"></div>
+                <div class="grid-item"><img src="imagem7.jpg" alt="Imagem 7"></div>
+                <div class="grid-item"><img src="imagem8.jpg" alt="Imagem 8"></div>
+                <div class="grid-item"><img src="imagem9.jpg" alt="Imagem 9"></div>
+                <div class="grid-item"><img src="imagem10.jpg" alt="Imagem 10"></div>
+            </div>
+
+            <h2>Filtros gerais</h2>
+
+        </aside>
+    
+        <main class="main" id="main">
+
+            <!--FILTROS-->
+            <div class="collapsible-container">
+                <button class="collapsible">Mais filtros</button>
+                <div class="collapsible-content">
+                    <div class="collapsible-content-inside">
+                        <div class="filter-container">
+                            <input type="text" name="min-temperature" id="min-temperature-input" placeholder="Temperatura mínima">
+                            <input type="number" name="max-temperature" id="max-temperature-input" placeholder="Temperatura máxima">
+                        </div>
+                        <div class="filter-container">
+                            <input type="number" name="min-commission" id="min-commission-input" placeholder="Comissão mínima">
+                            <input type="number" name="max-commission" id="max-commission-input" placeholder="Comissão máxima">
+                        </div>
+                        <div class="filter-container">
+                            <input type="number" name="min-price" id="min-price-input" placeholder="Preço mínimo">
+                            <input type="number" name="max-price" id="max-price-input" placeholder="Preço máximo">
+                        </div>
+                        <div class="filter-container">
+                            <select name="commission-rule-dropdown" id="commission-rule-dropdown">
+                                <option value="" disabled selected>Comissionamento</option>
+                                <option value="primeiro-clique">Primeiro clique</option>
+                                <option value="ultimo-clique">Último clique</option>
+                            </select>
+                        </div>
+                        <div class="filter-container">
+                            <select name="currency-dropdown" id="currency-dropdown">
+                                <option value="" disabled selected>Escolha a moeda</option>
+                                <option value="R$">R$</option>
+                                <option value="$">$</option>
+                            </select>
+                        </div>
+                        <div class="filter-container">
+                            <select name="country-dropdown" id="country-dropdown">
+                                <option value="" disabled selected>Escolha o país</option>
+                                <option value="Brasil">Brasil</option>
+                                <option value="EUA">EUA</option>
+                            </select>
+                        </div>
+                        <div class="filter-container">
+                            <select name="language-dropdown" id="language-dropdown">
+                                <option value="" disabled selected>Escolha o idioma</option>
+                                <option value="pt-br">Português (Brasil)</option>
+                                <option value="en-us">Inglês</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>         
+            
+            <div class="ordering-products-container">
+                <div class="total-found-products-container">
+                    <p id="total-found-products-text"><b>Produtos encontrados:</b> <p id="total-found-products-number">8421</p></p>
+                </div>
+                <div class="container-erase-filter-ordering">
+                    <button id="erase-filters-button" class="erase-filters-button">Limpar Filtros</button>
+                    <select name="ordering-dropdown" id="ordering-dropdown">
+                        <option value="" disabled selected>Ordenar produtos</option>
+                        <option value="change3Days-desc">Var. 3 Dias Decrescente</option>
+                        <option value="change3Days-asc">Var. 3 Dias Crescente</option>
+                        <option value="change6Days-desc">Var. 6 Dias Decrescente</option>
+                        <option value="change6Days-asc">Var. 6 Dias Crescente</option>
+                        <option value="change9Days-desc">Var. 9 Dias Decrescente</option>
+                        <option value="change9Days-asc">Var. 9 Dias Crescente</option>
+                        <option value="change18Days-desc">Var. 18 Dias Decrescente</option>
+                        <option value="change18Days-asc">Var. 18 Dias Crescente</option>
+                        <option value="temperature-asc">Temperatura Crescente</option>
+                        <option value="temperature-desc">Temperatura Decrescente</option>
+                        <option value="maxCommission-asc">Comissão Crescente</option>
+                        <option value="maxCommission-desc">Comissão Decrescente</option>
+                        <option value="rating-desc">Avaliação Decrescente</option>
+                        <option value="rating-asc">Avaliação Crescente</option>
+                        <option value="reviewCount-desc">N° de Avaliações Decrescente</option>
+                        <option value="reviewCount-asc">N° de Avaliações Crescente</option>
+                        <option value="blueprint-desc">Blueprint Decrescente</option>
+                        <option value="blueprint-asc">Blueprint Crescente</option>
+                        <option value="price-desc">Price Decrescente</option>
+                        <option value="price-asc">Price Crescente</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="container-pages-buttons">
+                <button class="pages-button" id="previous-page-button">Página anterior</button>
+                <div class="container-pages-numbers">
+                    <p>Página <p id="current-page-number"><b>1</b></p> de <p id="total-pages-number"><b>8759</b></p></p>
+                </div>
+                <button class="pages-button" id="next-page-button">Próxima página</button>
+            </div>
+
+            <div class="products-container" id="products-container">
+                <!--JS-->
+            </div>
+
+            <div class="container-pages-buttons">
+                <button class="pages-button" id="previous-page-button">Página anterior</button>
+                <div class="container-pages-numbers">
+                    <p>Página <p id="current-page-number"><b>1</b></p> de <p id="total-pages-number"><b>8759</b></p></p>
+                </div>
+                <button class="pages-button" id="next-page-button">Próxima página</button>
+            </div>
+
+        </main>
+
+        <aside class="aside-menu">
+            <h2>Anúncios</h2>
+
+            <div class="grid-container">
+
+            </div>
+
+        </aside>
+
+        
+    </div>
+    
+
+    <div class="footer-container">
+    </div>
+
+    <script src="./app/main.js"></script>
+</body>
+</html>

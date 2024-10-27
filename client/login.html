@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="login-container__title">Login</h2>
+        <form id="login-form" class="login-form">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" required>
+
+            <div id="error-message-container" class="error">
+                <p class="error-message" id="error-message"></p>
+            </div>
+
+            <span class="span-btn">
+                <button type="submit">Login</button>
+            </span>
+        </form>
+        <span class="span-create-account">
+            <a href="./register.html" class="span-create-account__a">Não tem Conta? Crie agora!</a>
+        </span>
+    </div>
+
+    <script src="./app/login.js"></script>
+</body>
+</html>
