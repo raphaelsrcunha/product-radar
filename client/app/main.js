@@ -25,7 +25,8 @@ let sortDirection = "";
 
 helloMessage.innerHTML = `<p class="container-hello__text">Olá, ${userName}</p>`;
 
-// Checagem se o usuário está autenticado ou não para redirecionar para a página de autenticação
+// Checking whether the user is authenticated or not to redirect to the authentication page
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const token = localStorage.getItem('authToken');
