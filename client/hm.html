@@ -11,13 +11,24 @@
     <div class="header-container">
 
         <header class="header">
-            <h1 class="title">
-                Product Radar
-            </h1>
-
+            <div class="header-left">
+                <img src="./resources/logo.png" class="logo-header" alt="">
+                <p class="title">Product <span class="bold">Radar</span></p>
+            </div>
+            <div class="header-right">
+                <span id="container-hello"><p class="container-hello__text">Olá, </p></span>
+                <p class="header-right__name-initial" id="header-right__name-initial"></p>
+            </div>
+            <div id="menu" class="menu">
+                <ul>
+                    <li>Perfil</li>
+                    <li>Configurações</li>
+                    <li>Ajuda</li>
+                    <li id="logout-btn">Sair</li>
+                </ul>
+            </div>
         </header>
-        <p id="logout-btn">Deslogar</p>
-        <span id="container-hello"><p class="container-hello__text">Olá, </p></span>
+        
     </div>
     <div class="main-container">
     
@@ -25,19 +36,16 @@
             <h2>Plataformas</h2>
 
             <div class="grid-container">
-                <div class="grid-item"><img src="#" alt="Imagem 1"></div>
-                <div class="grid-item"><img src="imagem2.jpg" alt="Imagem 2"></div>
-                <div class="grid-item"><img src="imagem3.jpg" alt="Imagem 3"></div>
-                <div class="grid-item"><img src="imagem4.jpg" alt="Imagem 4"></div>
-                <div class="grid-item"><img src="imagem5.jpg" alt="Imagem 5"></div>
-                <div class="grid-item"><img src="imagem6.jpg" alt="Imagem 6"></div>
-                <div class="grid-item"><img src="imagem7.jpg" alt="Imagem 7"></div>
-                <div class="grid-item"><img src="imagem8.jpg" alt="Imagem 8"></div>
-                <div class="grid-item"><img src="imagem9.jpg" alt="Imagem 9"></div>
-                <div class="grid-item"><img src="imagem10.jpg" alt="Imagem 10"></div>
+                <div class="grid-item" id="grid-item-hotmart"><img src="./resources/hotmart_logo.svg" alt="Imagem 1"></div>
+                <div class="grid-item"><img src="./resources/kiwify-logo.png" alt="Imagem 2"></div>
+                <div class="grid-item"><img src="./resources/buygoods-logo.png" alt="Imagem 3"></div>
+                <div class="grid-item"><img src="./resources/clickbank-logo.webp" alt="Imagem 4"></div>
+                <div class="grid-item"><img src="./resources/digistore24-logo.png" alt="Imagem 6"></div>
+                <div class="grid-item"><img src="./resources/drcash-logo.png" alt="Imagem 7"></div>
+                <div class="grid-item"><img src="./resources/monetizze-logo.png" alt="Imagem 8"></div>
+                <div class="grid-item"><img src="./resources/perfect-pay-logo.png" alt="Imagem 9"></div>
             </div>
 
-            <h2>Filtros gerais</h2>
 
         </aside>
     
@@ -45,8 +53,11 @@
 
             <!--FILTROS-->
             <div class="collapsible-container">
-                <button class="collapsible">Mais filtros</button>
-                <div class="collapsible-content">
+                <span class="collapsible-container-buttons">
+                    <button class="collapsible">Filtros</button>
+                    <button id="erase-filters-button" class="erase-filters-button">Limpar Filtros</button>
+                </span>
+                <div class="collapsible-content" id="collapsible-content">
                     <div class="collapsible-content-inside">
                         <div class="filter-container">
                             <input type="text" name="min-temperature" id="min-temperature-input" placeholder="Temperatura mínima">
@@ -97,7 +108,6 @@
                     <p id="total-found-products-text"><b>Produtos encontrados:</b> <p id="total-found-products-number">8421</p></p>
                 </div>
                 <div class="container-erase-filter-ordering">
-                    <button id="erase-filters-button" class="erase-filters-button">Limpar Filtros</button>
                     <select name="ordering-dropdown" id="ordering-dropdown">
                         <option value="" disabled selected>Ordenar produtos</option>
                         <option value="change3Days-desc">Var. 3 Dias Decrescente</option>

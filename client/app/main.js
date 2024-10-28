@@ -7,10 +7,12 @@ let totalFoundProducts = 0;
 let totalFoundProductsNumber = document.getElementById('total-found-products-number');
 let currentPageNumber = document.getElementById('current-page-number');
 let totalPagesNumber = document.getElementById('total-pages-number');
+const currentPageNumberElements = document.querySelectorAll('#current-page-number');
+const totalPagesNumberElements = document.querySelectorAll('#total-pages-number');
 
 const productsContainer = document.getElementById('products-container');
-const previousPageButton = document.getElementById("previous-page-button");
-const nextPageButton = document.getElementById("next-page-button");
+const nextPageButtons = document.querySelectorAll("#next-page-button");
+const previousPageButton = document.querySelectorAll("#previous-page-button");
 const orderingDropdown = document.getElementById("ordering-dropdown");
 const eraseFiltersButton = document.getElementById("erase-filters-button");
 
@@ -25,8 +27,12 @@ let sortDirection = "";
 
 helloMessage.innerHTML = `<p class="container-hello__text">Olá, ${userName}</p>`;
 
-// Checking whether the user is authenticated or not to redirect to the authentication page
+const iconFirstLetter = document.getElementById('header-right__name-initial');
 
+iconFirstLetter.textContent = userName[0]; 
+
+
+// Checking whether the user is authenticated or not to redirect to the authentication page
 document.addEventListener("DOMContentLoaded", () => {
 
     const token = localStorage.getItem('authToken');
@@ -35,6 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "http://127.0.0.1:5500/client/login.html";
     }
 })
+
+const gridItemHotmart = document.getElementById("grid-item-hotmart");
+gridItemHotmart.classList.add('selected');
 
 getProducts(currentPage, sortField, sortDirection);
 
@@ -202,49 +211,63 @@ async function getProducts(page, sortField, sortDirection) {
                 'Authorization': `Bearer ${token}` 
             },
     });
+
     const data = await res.json();
     products = data.content; 
     totalPages = data.totalPages;
     totalFoundProducts = data.totalElements;
     totalFoundProductsNumber.textContent = totalFoundProducts;
-    currentPageNumber.textContent = currentPage + 1;
-    totalPagesNumber.textContent = totalPages;
+    currentPageNumberElements.forEach(currentPageNumber =>
+        currentPageNumber.textContent = currentPage + 1
+    );
+    totalPagesNumberElements.forEach(totalPagesNumber =>
+        totalPagesNumber.textContent = totalPages
+    )
     
+    
+
     showProducts(products);
     updatePagination(); // Atualiza informações de paginação
 }
 
 function updatePagination() {
-    nextPageButton.disabled = currentPage >= totalPages - 1; // Desabilita se for a última página
-    previousPageButton.disabled = currentPage === 0; // Desabilita se for a primeira página
+    nextPageButtons.forEach(button => 
+        button.disabled = currentPage >= totalPages - 1
+    )
+
+    previousPageButton.forEach(button =>
+        button.disabled = currentPage === 0
+    )
 }
 
-nextPageButton.addEventListener('click', () => {
-    if (currentPage < totalPages - 1) {
-        currentPage++;
-        getProducts(currentPage, sortField, sortDirection);
-    }
-});
+nextPageButtons.forEach(button =>
+    button.addEventListener('click', () => {
+        if (currentPage < totalPages - 1) {
+            currentPage++;
+            getProducts(currentPage, sortField, sortDirection);
+        }
+    })
+);
 
-previousPageButton.addEventListener('click', () => {
-    if (currentPage > 0) {
-        currentPage--;
-        getProducts(currentPage, sortField, sortDirection);
-    }
-});
+previousPageButton.forEach(button => 
+    button.addEventListener('click', () => {
+        if (currentPage > 0) {
+            currentPage--;
+            getProducts(currentPage, sortField, sortDirection);
+        }
+    })
+);
 
 // Menu FILTROS
 document.addEventListener("DOMContentLoaded", function() {
-    const collapsibles = document.querySelectorAll(".collapsible");
+    const collapsibleButton = document.querySelector(".collapsible");
 
-    collapsibles.forEach(button => {
-        button.addEventListener("click", function() {
-            this.classList.toggle("active");
-            const content = this.nextElementSibling;
+    collapsibleButton.addEventListener("click", function() {
+        this.classList.toggle("active");
+        const content = document.querySelector(".collapsible-content");
 
-            // Alterna a classe 'open' para animar a altura
-            content.classList.toggle("open");
-        });
+        // Alterna a classe 'open' para animar a altura
+        content.classList.toggle("open");
     });
 });
 
@@ -261,3 +284,19 @@ logoutBtn.addEventListener('click', (event) => {
     localStorage.clear();
     window.location.href = "http://127.0.0.1:5500/client/login.html";
 })
+
+// Menu do usuário
+document.addEventListener('DOMContentLoaded', function() {
+    const nameInitial = document.getElementById('header-right__name-initial');
+    const menu = document.getElementById('menu');
+
+    nameInitial.addEventListener('click', function(event) {
+        event.stopPropagation(); // Impede a propagação do clique, senão ele abre e fecha ao mesmo tempo
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block'; 
+    });
+
+    // Essa função é para esconder o menu quando clicamos fora dele
+    document.addEventListener('click', function() {
+        menu.style.display = 'none'; 
+    });
+});

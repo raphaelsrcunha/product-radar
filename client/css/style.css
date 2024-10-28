@@ -14,16 +14,84 @@
     margin: 0px;
 }
 
-header {
+.header-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 10px;
 }
 
-.header-container {
+header {
     display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    align-items: center;
 }
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.title {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 30px;
+}
+
+.logo-header{
+    width: 65px;
+}
+
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-right__name-initial {
+    display: flex;
+    font-size: 25px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px;
+    background-color: white;
+    color: red;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.menu {
+    display: none; 
+    position: absolute; /* Para que ele flutue sobre outros elementos */
+    background-color: white; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); 
+    z-index: 1000; /* Para que o menu fique acima de outros elementos */
+    left: 93%;
+    top: 8%;
+    border-radius: 5px;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    padding: 8px 12px; 
+    cursor: pointer; 
+    color: black;
+}
+
+.menu li:hover {
+    background-color: #f0f0f0;
+}
+
 
 .bold {
     font-weight: 600;
@@ -31,6 +99,10 @@ header {
 
 .aside-menu {
     height: auto;
+}
+
+.logo-platforms {
+    width: 50px;
 }
 
 .product-container {
@@ -70,6 +142,13 @@ aside {
     text-align: center;
 }
 
+.selected {
+    background-color: white;
+    margin: 10px;
+    border-radius: 20px;
+    width: 150px;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -107,10 +186,11 @@ main {
 }
 
 .grid-item img {
-    width: auto;
+    width: 130px;
     height: auto;
     object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
 }
+
 
 .collapsible-container {
     display: flex;
@@ -120,7 +200,7 @@ main {
 
 .collapsible-container-buttons {
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
 }
 
 .collapsible {
