@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 :root {
     --background-color: #00090E;
     --text-color: #E1E1E1;
     --primary-color: #81FE88;
+    --primary-color-hover: #3dff47;
     --secondary-color: #888888;
     --tag-color: #171D1F;
-    --font-family: "Prompt", sans-serif;
+    --font-family: "Roboto", serif;
     --items-background: #171D1F;
     --items-background2: #394042;
 }
@@ -34,12 +37,13 @@ header {
 }
 
 .title {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 30px;
+    /*font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;*/
+    font-size: 32px;
+    color: white;
 }
 
 .logo-header{
-    width: 65px;
+    width: 55px;
 }
 
 
@@ -146,7 +150,7 @@ aside {
     background-color: white;
     margin: 10px;
     border-radius: 20px;
-    width: 150px;
+    width: 140px;
 }
 
 main {
@@ -191,6 +195,12 @@ main {
     object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
 }
 
+.grid-item:hover {
+    background-color: white;
+    margin: 10px;
+    border-radius: 20px;
+    width: 140px;
+}
 
 .collapsible-container {
     display: flex;
@@ -217,7 +227,7 @@ main {
 }
 
 .collapsible:hover {
-    background-color: var(--items-background2);
+    background-color: var(--primary-color-hover);
 }
 
 .collapsible-content {
@@ -229,19 +239,30 @@ main {
 }
 
 .collapsible-content.open {
-    max-height: 200px; /* Ajuste conforme necessário para o conteúdo */
+    max-height: 400px; /* Ajuste conforme necessário para o conteúdo */
 }
 
 .collapsible-content-inside {
-    padding: 10px 0px;
     display: flex;
-    gap: 20px;
-    row-gap: 30px;
+    flex-direction: column;
+    padding: 10px 0px;
+    row-gap: 20px;
     flex-wrap:wrap
 }
 
-input, select {
-    width: 180px;
+.filter-container-double {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.filter-container-single {
+    display: flex;
+    justify-content: space-between;
+}
+
+input {
+    width: 49%;
     padding: 8px 16px;
     background-color: var(--secondary-color);
     border: none;
@@ -256,8 +277,54 @@ input::placeholder {
     color: var(--text-color);
 }
 
-.filter-container {
-    width: 370px;
+select {
+    width: 220px;
+    padding: 8px 16px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 4px;
+    font-family: var(--font-family);
+    line-height: 25px;
+    height: 35px;
+    color: var(--text-color);
+}
+
+.filter-container-big {
+    display: block;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    background-color: #333333;
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.filter-container-big-title {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.filter-container-big-inputs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filter-container-small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    background-color: #333333;
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.filter-container-small-title {
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .ordering-products-container {
@@ -278,10 +345,14 @@ input::placeholder {
     position: relative;
     width: 150px;
     text-align: center;
-    padding: 9px;
+    padding: 10px;  
     border-radius: 8px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 17px;
+}
+
+.erase-filters-button:hover {
+    background-color: var(--primary-color-hover);
 }
 
 .container-pages-buttons {
@@ -315,7 +386,7 @@ input::placeholder {
 }
 
 .pages-button:hover {
-    background-color: var(--items-background2);
+    background-color: var(--primary-color-hover);
 }
 
 .products-container {
@@ -424,18 +495,6 @@ input::placeholder {
 
 /**/
 
-.popup-button {
-    background-color: var(--primary-color);
-    color: var(--tag-color);
-    border: 1px solid var(--primary-color);
-    position: relative;
-    width: 200px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
 .popup {
     display: none; /* Oculto por padrão */
     position: fixed;
@@ -447,36 +506,88 @@ input::placeholder {
     z-index: 1000; /* Coloca o popup acima de outros elementos */
 }
 
+.popup-button {
+    background-color: var(--primary-color);
+    color: var(--tag-color);
+    border: 1px solid var(--primary-color);
+    position: relative;
+    width: 180px;
+    text-align: center;
+    padding: 10px;  
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.popup-button a {
+    color: black;
+}
+
+.popup-button:hover {
+    background-color: var(--primary-color-hover);
+}
+
 .popup-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 20px;
+    padding: 30px 40px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-content-header {
+    width: 100%;
+}
+
+.popup-title {
+    display: block;
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .close-button {
+    position: absolute;
+    left: 89%;
+    top: 3%;
     cursor: pointer;
-    font-size: 20px;
-    float: right;
+    font-size: 30px;
+    color: black;
+    justify-content: right;
+    width: 100%;
 }
 
-.popup-button {
-    margin-top: 10px;
+.popup-button-link {
+    background-color: var(--primary-color);
+    color: black;
+    border: 1px solid var(--primary-color);
+    position: relative;
+    width: 300px;
+    text-align: center;
+    padding: 10px;  
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    margin-bottom: 10px;
 }
 
-.popup-button:hover {
-    background-color: var(--items-background2);
+.popup-button-link:hover {
+    background-color: var(--primary-color-hover);
 }
-
+/*
 .option-button {
     display: block;
     margin: 10px 0;
     padding: 10px;
-    background-color: #007BFF; /* Cor do botão */
+    background-color: #007BFF; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -484,5 +595,6 @@ input::placeholder {
 }
 
 .option-button:hover {
-    background-color: #0056b3; /* Efeito hover */
+    background-color: #0056b3; 
 }
+*/

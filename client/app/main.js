@@ -19,18 +19,15 @@ const eraseFiltersButton = document.getElementById("erase-filters-button");
 const logoutBtn = document.getElementById('logout-btn');
 
 const helloMessage = document.getElementById('container-hello');
+const iconFirstLetter = document.getElementById('header-right__name-initial');
+
 const userName = localStorage.getItem('name');    
+
+helloMessage.innerHTML = `<p class="container-hello__text">Olá, ${userName}</p>`;
 
 let selectedOption = [];
 let sortField = "";
 let sortDirection = "";
-
-helloMessage.innerHTML = `<p class="container-hello__text">Olá, ${userName}</p>`;
-
-const iconFirstLetter = document.getElementById('header-right__name-initial');
-
-iconFirstLetter.textContent = userName[0]; 
-
 
 // Checking whether the user is authenticated or not to redirect to the authentication page
 document.addEventListener("DOMContentLoaded", () => {
@@ -117,14 +114,18 @@ function showProducts(products) {
                             <p class="popup-button" product-id="${product.id}">Mais informações</p>
                             <div id="popup-${product.id}" class="popup" style="display: none;">
                                 <div class="popup-content">
-                                    <span class="close-button">&times;</span>
-                                    <h2>Links</h2>
-                                    <p class="popup-button"><a href="${product.hotmartProductUrl}" target="_blank">Página do Produto</a></p>
-                                    <p class="popup-button"><a href="${product.googleProductUrl}" target="_blank">Rede de Pesquisa - Produto</a></p>
-                                    <p class="popup-button"><a href="${product.googleProducerUrl}" target="_blank">Rede de Pesquisa - Produtor</a></p>
-                                    <p class="popup-button"><a href="${product.tiktokProducerUrl}" target="_blank">Pesquisa TikTok - Produtor</a></p>
-                                    <p class="popup-button"><a href="${product.youtubeProductUrl}" target="_blank">Pesquisa YouTube - Produto</a></p>
-                                    <p class="popup-button"><a href="${product.youtubeProducerUrl}" target="_blank">Pesquisa YouTube - Produtor</a></p>
+                                    <span class="popup-content-header">
+                                        <span class="close-button">&times;</span>
+                                        <h2 class="popup-title">Links</h2>
+                                    </span>
+
+                                    
+                                    <a href="${product.hotmartProductUrl}" target="_blank"><p class="popup-button-link">Página do Produto</p></a>
+                                    <a href="${product.googleProductUrl}" target="_blank"><p class="popup-button-link">Rede de Pesquisa - Produto</p></a>
+                                    <a href="${product.googleProducerUrl}" target="_blank"><p class="popup-button-link">Rede de Pesquisa - Produtor</p></a>
+                                    <a href="${product.tiktokProducerUrl}" target="_blank"><p class="popup-button-link">Pesquisa TikTok - Produtor</p></a>
+                                    <a href="${product.youtubeProductUrl}" target="_blank"><p class="popup-button-link">Pesquisa YouTube - Produto</p></a>
+                                    <a href="${product.youtubeProducerUrl}" target="_blank"><p class="popup-button-link">Pesquisa YouTube - Produtor</p></a>
                                 </div>
                             </div>
                         </div>
@@ -216,7 +217,9 @@ async function getProducts(page, sortField, sortDirection) {
     products = data.content; 
     totalPages = data.totalPages;
     totalFoundProducts = data.totalElements;
-    totalFoundProductsNumber.textContent = totalFoundProducts;
+    const totalFormated = parseInt(totalFoundProducts).toLocaleString('pt-BR')
+    totalFoundProductsNumber.textContent = totalFormated;
+
     currentPageNumberElements.forEach(currentPageNumber =>
         currentPageNumber.textContent = currentPage + 1
     );
@@ -268,8 +271,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Alterna a classe 'open' para animar a altura
         content.classList.toggle("open");
+
+        this.textContent = collapsibleButton.classList.contains("active") ? "Ocultar Filtros" : "Ver Filtros";
     });
+
+    if(collapsibleButton.classList.contains("active")) {
+        console.log("active")
+    }
 });
+
+
+
 
 eraseFiltersButton.addEventListener("click", () => {
     [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput].forEach(input => {
@@ -300,3 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
         menu.style.display = 'none'; 
     });
 });
+
+//Ícone com a primeira letra do nome no meu superior direito
+iconFirstLetter.textContent = userName[0]; 
+

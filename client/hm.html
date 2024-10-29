@@ -36,14 +36,15 @@
             <h2>Plataformas</h2>
 
             <div class="grid-container">
-                <div class="grid-item" id="grid-item-hotmart"><img src="./resources/hotmart_logo.svg" alt="Imagem 1"></div>
-                <div class="grid-item"><img src="./resources/kiwify-logo.png" alt="Imagem 2"></div>
-                <div class="grid-item"><img src="./resources/buygoods-logo.png" alt="Imagem 3"></div>
-                <div class="grid-item"><img src="./resources/clickbank-logo.webp" alt="Imagem 4"></div>
-                <div class="grid-item"><img src="./resources/digistore24-logo.png" alt="Imagem 6"></div>
-                <div class="grid-item"><img src="./resources/drcash-logo.png" alt="Imagem 7"></div>
-                <div class="grid-item"><img src="./resources/monetizze-logo.png" alt="Imagem 8"></div>
-                <div class="grid-item"><img src="./resources/perfect-pay-logo.png" alt="Imagem 9"></div>
+                <div class="grid-item" id="grid-item-hotmart"><a href=""><img src="./resources/hotmart_logo.svg" alt="Imagem 1"></a></div>
+                <div class="grid-item"><a href=""><img src="./resources/kiwify-logo.png" alt="Imagem 2"></a></div>
+                <div class="grid-item"><a href=""><img src="./resources/buygoods-logo.png" alt="Imagem 3"></a></div>
+                <div class="grid-item"><a href=""><img src="./resources/clickbank-logo.webp" alt="Imagem 4"></a></div>
+                <div class="grid-item"><a href=""><img src="./resources/digistore24-logo.png" alt="Imagem 6"></a></div>
+                <div class="grid-item"><a href=""><img src="./resources/drcash-logo.png" alt="Imagem 7"></a></div>
+                <div class="grid-item"><a href=""><img src="./resources/monetizze-logo.png" alt="Imagem 8"></a></div>
+                <div class="grid-item"><a href=""><img src="./resources/perfect-pay-logo.png" alt="Imagem 9"></a></div>
+                <div class="grid-item"><a href=""><img src="./resources/braip-logo.png" alt="Imagem 9"></a></div>
             </div>
 
 
@@ -54,50 +55,67 @@
             <!--FILTROS-->
             <div class="collapsible-container">
                 <span class="collapsible-container-buttons">
-                    <button class="collapsible">Filtros</button>
+                    <button class="collapsible">Ver Filtros</button>
                     <button id="erase-filters-button" class="erase-filters-button">Limpar Filtros</button>
                 </span>
                 <div class="collapsible-content" id="collapsible-content">
                     <div class="collapsible-content-inside">
-                        <div class="filter-container">
-                            <input type="text" name="min-temperature" id="min-temperature-input" placeholder="Temperatura mínima">
-                            <input type="number" name="max-temperature" id="max-temperature-input" placeholder="Temperatura máxima">
+                        <div class="filter-container-double">
+                            <div class="filter-container-big">
+                                <p class="filter-container-big-title bold">Temperatura</p>
+                                <span class="filter-container-big-inputs">
+                                    <input type="text" name="min-temperature" id="min-temperature-input" placeholder="Mínima">
+                                    <input type="number" name="max-temperature" id="max-temperature-input" placeholder="Máxima">
+                                </span>
+                            </div>
+                            <div class="filter-container-big">
+                                <p class="filter-container-big-title bold">Comissão</p>
+                                <span class="filter-container-big-inputs">
+                                    <input type="number" name="min-commission" id="min-commission-input" placeholder="Mínima">
+                                    <input type="number" name="max-commission" id="max-commission-input" placeholder="Máxima">
+                                </span>
+                            </div>
+                            <div class="filter-container-big">
+                                <p class="filter-container-big-title bold">Preço</p>
+                                <span class="filter-container-big-inputs">
+                                    <input type="number" name="min-price" id="min-price-input" placeholder="Mínimo">
+                                    <input type="number" name="max-price" id="max-price-input" placeholder="Máximo">
+                                </span>
+                            </div>
                         </div>
-                        <div class="filter-container">
-                            <input type="number" name="min-commission" id="min-commission-input" placeholder="Comissão mínima">
-                            <input type="number" name="max-commission" id="max-commission-input" placeholder="Comissão máxima">
-                        </div>
-                        <div class="filter-container">
-                            <input type="number" name="min-price" id="min-price-input" placeholder="Preço mínimo">
-                            <input type="number" name="max-price" id="max-price-input" placeholder="Preço máximo">
-                        </div>
-                        <div class="filter-container">
-                            <select name="commission-rule-dropdown" id="commission-rule-dropdown">
-                                <option value="" disabled selected>Comissionamento</option>
-                                <option value="primeiro-clique">Primeiro clique</option>
-                                <option value="ultimo-clique">Último clique</option>
-                            </select>
-                        </div>
-                        <div class="filter-container">
-                            <select name="currency-dropdown" id="currency-dropdown">
-                                <option value="" disabled selected>Escolha a moeda</option>
-                                <option value="R$">R$</option>
-                                <option value="$">$</option>
-                            </select>
-                        </div>
-                        <div class="filter-container">
-                            <select name="country-dropdown" id="country-dropdown">
-                                <option value="" disabled selected>Escolha o país</option>
-                                <option value="Brasil">Brasil</option>
-                                <option value="EUA">EUA</option>
-                            </select>
-                        </div>
-                        <div class="filter-container">
-                            <select name="language-dropdown" id="language-dropdown">
-                                <option value="" disabled selected>Escolha o idioma</option>
-                                <option value="pt-br">Português (Brasil)</option>
-                                <option value="en-us">Inglês</option>
-                            </select>
+                        <div class="filter-container-single">
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Tipo de Comissionamento</p>
+                                <select name="commission-rule-dropdown" id="commission-rule-dropdown">
+                                    <option value="" disabled selected>Comissionamento</option>
+                                    <option value="primeiro-clique">Primeiro clique</option>
+                                    <option value="ultimo-clique">Último clique</option>
+                                </select>
+                            </div>
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Moeda</p>
+                                <select name="currency-dropdown" id="currency-dropdown">
+                                    <option value="" disabled selected>Escolha a moeda</option>
+                                    <option value="R$">R$</option>
+                                    <option value="$">$</option>
+                                </select>
+                            </div>
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">País</p>
+                                <select name="country-dropdown" id="country-dropdown">
+                                    <option value="" disabled selected>Escolha o país</option>
+                                    <option value="Brasil">Brasil</option>
+                                    <option value="EUA">EUA</option>
+                                </select>
+                            </div>
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Idioma</p>
+                                <select name="language-dropdown" id="language-dropdown">
+                                    <option value="" disabled selected>Escolha o idioma</option>
+                                    <option value="pt-br">Português (Brasil)</option>
+                                    <option value="en-us">Inglês</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
