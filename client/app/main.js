@@ -166,6 +166,15 @@ function showProducts(products) {
             const popup = button.closest('.popup');
             popup.style.display = 'none'; // Oculta o popup
         });
+
+        //Close popup if press ESC
+        document.addEventListener('keydown', function(e) {
+            if(e.key === "Escape") {
+                const popup = button.closest('.popup');
+                popup.style.display = 'none';
+            }
+        })
+
     });
 
     window.addEventListener('click', (event) => {
