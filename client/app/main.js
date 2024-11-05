@@ -39,9 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 })
 
+//Para seleção da plataforma no meu esquerdo
 const gridItemHotmart = document.getElementById("grid-item-hotmart");
 gridItemHotmart.classList.add('selected');
 
+//Faz uma chamada para os produtos
 getProducts(currentPage, sortField, sortDirection);
 
 // Função debounce
@@ -66,15 +68,44 @@ const minCommissionInput = document.getElementById('min-commission-input');
 const maxCommissionInput = document.getElementById('max-commission-input');
 const minPriceInput = document.getElementById('min-price-input');
 const maxPriceInput = document.getElementById('max-price-input');
+const locale = document.getElementById('language-dropdown');
+const currency = document.getElementById('currency-dropdown');
 
 [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput].forEach(input => {
     input.addEventListener('input', updateFilters);
 });
 
+locale.addEventListener('change', updateFilters);
+currency.addEventListener('change', updateFilters);
+
 function showProducts(products) {
     productsContainer.innerHTML = "";
 
+     function formatDate(date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Mês é baseado em 0
+        return `${day}/${month}`;
+    }
+
+    // Função para calcular as datas
+    function getDateLabels() {
+        const today = new Date(); // Data atual
+        const labels = [];
+
+        // Adiciona as datas dos últimos dias
+        labels.push("Atual"); // Hoje
+        labels.push(formatDate(new Date(today.setDate(today.getDate() - 3)))); // 3 dias atrás
+        labels.push(formatDate(new Date(today.setDate(today.getDate() - 6)))); // 9 dias atrás
+        labels.push(formatDate(new Date(today.setDate(today.getDate() - 9)))); // 18 dias atrás
+
+        today.setDate(today.getDate() + 18); // Para as operações futuras de data
+        return labels.reverse(); // Reverte a ordem para "Hoje", "3 dias", "9 dias", "18 dias"
+    }
+
     products.forEach(product => {
+        
+        const chartId = `chart-${product.id}`;
+
         productsContainer.innerHTML += `
             <div class="product-container">
                 <div class="product-container__image">
@@ -96,20 +127,20 @@ function showProducts(products) {
                             <div class="product-metrics">
                                 <div class="product-metrics__stars">                            
                                     <img src="./resources/star.svg" alt="">
-                                    <p>${product.rating}</p>
-                                    <p>(${product.reviewCount} avaliações)</p>
+                                    <p>${product.rating.toFixed(1)}</p>
+                                    <p>(${product.reviewCount} ${product.reviewCount !== 1 ? 'avaliações' : 'avaliação'})</p>
                                 </div>
                                 <div class="product-metrics__temperature">
                                     <img src="./resources/fire.svg" alt="">
-                                    <p>(${product.temperature})</p>
+                                    <p>(${product.temperature.toFixed(0)})</p>
                                 </div>
                                 <div class="product-metrics__blueprint">
                                     <img src="./resources/blueprint.svg" alt="">
                                     <p>(${product.blueprint}%)</p>
                                 </div>
                             </div>
-                            <p class="product-maximum-price"><b>Preço máximo do produto:</b> R$ ${product.price}</p>
-                            <p class="product-maximum-comission"><b>Comissão máxima:</b> R$ ${product.maxCommission} (${product.maxCommissionPercentage}%)</p>
+                            <p class="product-maximum-price"><b>Preço máximo do produto:</b> ${product.currency} ${product.price.toFixed(2)}</p>
+                            <p class="product-maximum-comission"><b>Comissão máxima:</b> ${product.currency} ${product.maxCommission} (${product.maxCommissionPercentage}%)</p>
                             
                             <p class="popup-button" product-id="${product.id}">Mais informações</p>
                             <div id="popup-${product.id}" class="popup" style="display: none;">
@@ -129,24 +160,123 @@ function showProducts(products) {
                                 </div>
                             </div>
                         </div>
-                        <div class="product-container-body__right">
-                            <div class="variation-container">
-                                <img src="./resources/fire.svg" alt=""><p><b>3 dias: </b>${product.change3Days}</p>
-                            </div>
-                            <div class="variation-container">
-                                <img src="./resources/fire.svg" alt=""><p><b>6 dias: </b>${product.change6Days}</p>
-                            </div>
-                            <div class="variation-container">
-                                <img src="./resources/fire.svg" alt=""><p><b>9 dias: </b>${product.change9Days}</p>
-                            </div>
-                            <div class="variation-container">
-                                <img src="./resources/fire.svg" alt=""><p><b>18 dias: </b>${product.change18Days}</p>
-                            </div>
+                        <div class="product-container-body__right" style="width: 300px; margin-left: 0px; margin-top: 0px; width: 40%; height: 100%">
+                            <canvas id="${chartId}" width="10" height="5"></canvas>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         `;
+
+    
+        setTimeout(() => {
+            const ctx = document.getElementById(chartId).getContext('2d');
+            const labels = getDateLabels(); // Chama a função para pegar as labels com as datas
+
+            // Cria um gráfico para cada produto, usando dados específicos
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: [
+                            product.ago18Days.toFixed(0), 
+                            product.ago9Days.toFixed(0), 
+                            product.ago3Days.toFixed(0), 
+                            product.temperature.toFixed(0)
+                        ],
+                        borderColor: 'rgba(0, 255, 0, 1)',
+                        backgroundColor: 'rgba(0, 255, 0, 0.5)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'black',
+                        pointBorderColor: 'black',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `Valor: ${context.raw}`;
+                                }
+                            },
+                            displayColors: false,
+                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff'
+                        },
+                        datalabels: {
+                            align: 'top',
+                            anchor: 'end',
+                            color: 'white',
+                            font: {
+                                size: 15
+                            },
+                            formatter: function(value) {
+                                return value;
+                            }
+                        },
+                        title: {
+                            display: true, // Exibe o título
+                            text: 'Temperatura nos últimos dias', // Define o texto do título
+                            color: 'white', // Define a cor do título
+                            font: {
+                                size: 15, // Define o tamanho do título
+                                weight: 400
+                            },
+                            padding: {
+                                top: 0,
+                                bottom: 5
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            suggestedMin: 0,
+                            suggestedMax: 180,
+                            beginAtZero: false,
+                            grid: {
+                                display: true
+                            },
+                            ticks: {
+                                color: 'white',
+                                font: {
+                                    size: 14
+                                },
+                                callback: function(value) {
+                                    // Exibe apenas 0, 100 e 200
+                                    if (value === 50 || value === 150) {
+                                        return value;
+                                    }
+                                    return ''; // Retorna uma string vazia para não exibir outros valores
+                                }
+                            },
+                            borderColor: 'black',
+                            borderWidth: 8
+                        },
+                        x: {
+                            grid: {
+                                display: true
+                            },
+                            ticks: {
+                                color: 'white',
+                                font: {
+                                    size: 14 // Aumenta o tamanho da fonte dos valores no eixo Y
+                                }
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
+        }, 0);
+        
     });
 
     // Adiciona eventos para os botões de abrir e fechar popups aqui
@@ -192,6 +322,7 @@ orderingDropdown.addEventListener('change', () => {
     updateFilters(); // Chama a função de atualização de filtros
 });
 
+
 async function getProducts(page, sortField, sortDirection) {
     const minTemperature = document.getElementById('min-temperature-input').value;
     const maxTemperature = document.getElementById('max-temperature-input').value;
@@ -199,6 +330,8 @@ async function getProducts(page, sortField, sortDirection) {
     const maxMaxCommission = document.getElementById('max-commission-input').value;
     const minPrice = document.getElementById('min-price-input').value;
     const maxPrice = document.getElementById('max-price-input').value;
+    const locale = document.getElementById('language-dropdown').value;
+    const currency = document.getElementById('currency-dropdown').value;
 
     const params = new URLSearchParams();
     params.append('page', page);
@@ -214,6 +347,8 @@ async function getProducts(page, sortField, sortDirection) {
     if (maxMaxCommission) params.append('maxMaxCommission', maxMaxCommission);
     if (minPrice) params.append('minPrice', minPrice);
     if (maxPrice) params.append('maxPrice', maxPrice);
+    if (locale) params.append('locale', locale);
+    //if (currency) params.append('currency', currency);
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {
@@ -293,10 +428,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 eraseFiltersButton.addEventListener("click", () => {
-    [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput].forEach(input => {
+    [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, locale].forEach(input => {
         input.value = "";
     });
-    getProducts(currentPage, sortField, sortDirection);
+    getProducts(1, sortField, sortDirection);
 })
 
 logoutBtn.addEventListener('click', (event) => {
@@ -325,3 +460,5 @@ document.addEventListener('DOMContentLoaded', function() {
 //Ícone com a primeira letra do nome no meu superior direito
 iconFirstLetter.textContent = userName[0]; 
 
+
+   

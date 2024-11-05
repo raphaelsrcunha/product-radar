@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Linhas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+
+<div style="width: 200px;">
+    <canvas id="myChart" width="10" height="5"></canvas>
+</div>
+
+<style>
+    div {
+        width: 300px;
+    }
+</style>
+
+<script>
+    const product = {
+        ago3Days: 10,
+        ago6Days: 8,
+        ago9Days: 15,
+        ago18Days: 40,
+        today: 56
+    };
+
+    const labels = ['3 dias', '6 dias', '9 dias', '18 dias', 'today'];
+    const data = [
+        product.ago3Days,
+        product.ago6Days,
+        product.ago9Days,
+        product.ago18Days,
+        product.today
+    ];
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data,
+                borderColor: 'rgba(0, 255, 0, 1)', // Cor da linha (verde)
+                backgroundColor: 'rgba(0, 255, 0, 0.5)', // Cor do preenchimento
+                borderWidth: 2,
+                pointBackgroundColor: 'green', // Cor dos pontos (verde)
+                pointBorderColor: 'green',
+                pointRadius: 5 // Tamanho dos pontos
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false // Desativa a legenda
+                },
+                tooltip: {
+                    enabled: false // Desativa os tooltips
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        display: false // Desativa a grade do eixo Y
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false // Desativa a grade do eixo X
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

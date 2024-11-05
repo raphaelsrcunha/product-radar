@@ -24,14 +24,26 @@ public class Product {
     @Column(nullable = false)
     private Double temperature;
 
+    @Column(name = "3_days")
+    private Double ago3Days;
+
     @Column(name = "change_3_days")
     private Double change3Days;
+
+    @Column(name = "6_days")
+    private Double ago6Days;
 
     @Column(name = "change_6_days")
     private Double change6Days;
 
+    @Column(name = "9_days")
+    private Double ago9Days;
+
     @Column(name = "change_9_days")
     private Double change9Days;
+
+    @Column(name = "18_days")
+    private Double ago18Days;
 
     @Column(name = "change_18_days")
     private Double change18Days;

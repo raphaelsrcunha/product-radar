@@ -40,11 +40,12 @@ document.getElementById('login-form').addEventListener('submit', async (event) =
             //Fazendo o redirecionamento para a Home
             window.location.href = "http://127.0.0.1:5500/client/hm.html";
         } else {
-            console.error('Erro no login:', response.statusText);
-            errorMessage.innerHTML = `<p class="error-message" id="error-message">Email ou senha incorretos</p>`;
+            const errorText = await response.text();
+            const errorMsg = errorText || "Email ou senha incorretos";
+            errorMessage.innerHTML = `<p class="error-message" id="error-message">${errorMsg}</p>`;
         }
     } catch (error) {
-        console.error('Erro na requisição:', error);
+        errorMessage.innerHTML = `<p class="error-message" id="error-message">${errorMsg}</p>`;
     }
 });
 

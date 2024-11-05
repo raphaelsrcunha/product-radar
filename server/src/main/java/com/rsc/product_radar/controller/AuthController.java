@@ -1,6 +1,7 @@
 package com.rsc.product_radar.controller;
 
 import com.rsc.product_radar.domain.user.User;
+import com.rsc.product_radar.domain.user.UserService;
 import com.rsc.product_radar.dto.LoginRequestDTO;
 import com.rsc.product_radar.dto.RegisterRequestDTO;
 import com.rsc.product_radar.dto.ResponseDTO;
@@ -20,21 +21,21 @@ import java.util.Optional;
 public class AuthController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
-        User user = this.userRepository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
-        if(passwordEncoder.matches(body.password(), user.getPassword())) {
-            String token = this.tokenService.generateToken(user);
-            return ResponseEntity.ok(new ResponseDTO(user.getEmail(), user.getName(), token));
-        }
-        return ResponseEntity.badRequest().build();
+
+        ResponseDTO responseDTO = this.userService.login(body);
+
+        return ResponseEntity.ok(responseDTO);
     }
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody RegisterRequestDTO body) {
+
         Optional<User> user = this.userRepository.findByEmail(body.email());
         if(user.isEmpty()){
             User newUser = new User();
