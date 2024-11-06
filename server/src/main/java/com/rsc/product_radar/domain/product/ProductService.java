@@ -8,16 +8,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {
-
     @Autowired
     private ProductRepository productRepository;
 
-    public Page<Product> getAllProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
-    }
+    public Page<Product> getFilteredProducts(Pageable pageable, Double minTemperature, Double maxTemperature,
+                                             Double minMaxCommission, Double maxMaxCommission, Double minPrice, Double maxPrice, String currency, String locale) {
 
-    public Page<Product> getFilteredProducts(Pageable pageable, Double minTemperature, Double maxTemperature, Double minMaxCommission, Double maxMaxCommission, Double minPrice, Double maxPrice) {
-        return productRepository.findAllByTemperatureBetweenAndMaxCommissionBetweenAndPriceBetween(minTemperature, maxTemperature, minMaxCommission, maxMaxCommission, minPrice, maxPrice, pageable);
-    }
+        String currencyFilter = (currency == null || currency.trim().isEmpty()) ? "" : currency;
+        String localeFilter = (locale == null || locale.trim().isEmpty()) ? "" : locale;
 
+        return productRepository.findWithFilters(
+                minTemperature, maxTemperature, minMaxCommission, maxMaxCommission,
+                minPrice, maxPrice, currencyFilter, localeFilter, pageable
+        );
+    }
 }

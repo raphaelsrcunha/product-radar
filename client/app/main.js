@@ -46,6 +46,7 @@ gridItemHotmart.classList.add('selected');
 //Faz uma chamada para os produtos
 getProducts(currentPage, sortField, sortDirection);
 
+
 // Função debounce
 function debounce(func, delay) {
     let timeout;
@@ -68,15 +69,16 @@ const minCommissionInput = document.getElementById('min-commission-input');
 const maxCommissionInput = document.getElementById('max-commission-input');
 const minPriceInput = document.getElementById('min-price-input');
 const maxPriceInput = document.getElementById('max-price-input');
-const locale = document.getElementById('language-dropdown');
 const currency = document.getElementById('currency-dropdown');
+const commissionRule = document.getElementById('commission-rule-dropdown');
+const locale = document.getElementById('locale-dropdown');
+const language = document.getElementById('language-dropdown');
 
 [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput].forEach(input => {
     input.addEventListener('input', updateFilters);
 });
 
-locale.addEventListener('change', updateFilters);
-currency.addEventListener('change', updateFilters);
+
 
 function showProducts(products) {
     productsContainer.innerHTML = "";
@@ -314,6 +316,9 @@ function showProducts(products) {
     });
 }
 
+//country.addEventListener('change', updateFilters);
+//currency.addEventListener('change', getProducts);
+
 orderingDropdown.addEventListener('change', () => {
     currentPage = 0;
     selectedOption = orderingDropdown.value.split('-');
@@ -330,8 +335,9 @@ async function getProducts(page, sortField, sortDirection) {
     const maxMaxCommission = document.getElementById('max-commission-input').value;
     const minPrice = document.getElementById('min-price-input').value;
     const maxPrice = document.getElementById('max-price-input').value;
-    const locale = document.getElementById('language-dropdown').value;
+    //const locale = document.getElementById('language-dropdown').value;
     const currency = document.getElementById('currency-dropdown').value;
+    const locale = document.getElementById('locale-dropdown').value;
 
     const params = new URLSearchParams();
     params.append('page', page);
@@ -347,8 +353,8 @@ async function getProducts(page, sortField, sortDirection) {
     if (maxMaxCommission) params.append('maxMaxCommission', maxMaxCommission);
     if (minPrice) params.append('minPrice', minPrice);
     if (maxPrice) params.append('maxPrice', maxPrice);
-    if (locale) params.append('locale', locale);
-    //if (currency) params.append('currency', currency);
+    if (currency && currency !== "0") params.append('currency', currency);
+    if (locale && locale !== "0") params.append('locale', locale);
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {
@@ -370,12 +376,16 @@ async function getProducts(page, sortField, sortDirection) {
     totalPagesNumberElements.forEach(totalPagesNumber =>
         totalPagesNumber.textContent = totalPages
     )
-    
-    
 
     showProducts(products);
     updatePagination(); // Atualiza informações de paginação
 }
+
+const currencyDropdown = document.getElementById('currency-dropdown');
+currencyDropdown.addEventListener('change', updateFilters);
+
+const localeDropdown = document.getElementById('locale-dropdown');
+localeDropdown.addEventListener('change', updateFilters);
 
 function updatePagination() {
     nextPageButtons.forEach(button => 
@@ -431,6 +441,8 @@ eraseFiltersButton.addEventListener("click", () => {
     [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, locale].forEach(input => {
         input.value = "";
     });
+    document.getElementById('currency-dropdown').value = "0";
+    document.getElementById('locale-dropdown').value = "0";
     getProducts(1, sortField, sortDirection);
 })
 
