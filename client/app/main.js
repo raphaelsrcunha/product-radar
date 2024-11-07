@@ -74,8 +74,10 @@ const commissionRule = document.getElementById('commission-rule-dropdown');
 const locale = document.getElementById('locale-dropdown');
 const language = document.getElementById('language-dropdown');
 const ratingDropdown = document.getElementById('rating-dropdown');
+const minMaxCommissionPercentageInput = document.getElementById('min-max-commission-percentage');
+const maxMaxCommissionPercentageInput = document.getElementById('max-max-commission-percentage');
 
-[minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput].forEach(input => {
+[minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput].forEach(input => {
     input.addEventListener('input', updateFilters);
 });
 
@@ -339,6 +341,8 @@ async function getProducts(page, sortField, sortDirection) {
     const currency = document.getElementById('currency-dropdown').value;
     const locale = document.getElementById('locale-dropdown').value;
     const rating = document.getElementById('rating-dropdown').value;
+    const minMaxCommissionPercentage = document.getElementById('min-max-commission-percentage').value;
+    const maxMaxCommissionPercentage = document.getElementById('max-max-commission-percentage').value;
 
     const params = new URLSearchParams();
     params.append('page', page);
@@ -357,6 +361,9 @@ async function getProducts(page, sortField, sortDirection) {
     if (currency && currency !== "0") params.append('currency', currency);
     if (locale && locale !== "0") params.append('locale', locale);
     if (rating && rating !== "0") params.append('rating', rating);
+    if (minMaxCommissionPercentage) params.append('minMaxCommissionPercentage', minMaxCommissionPercentage);
+    if (maxMaxCommissionPercentage) params.append('maxMaxCommissionPercentage', maxMaxCommissionPercentage);
+
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {
@@ -442,7 +449,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 eraseFiltersButton.addEventListener("click", () => {
-    [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, locale].forEach(input => {
+    [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, locale, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput].forEach(input => {
         input.value = "";
     });
     document.getElementById('currency-dropdown').value = "0";

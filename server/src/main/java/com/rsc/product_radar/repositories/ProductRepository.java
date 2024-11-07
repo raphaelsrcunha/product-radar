@@ -12,6 +12,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.temperature BETWEEN :minTemperature AND :maxTemperature AND " +
             "p.maxCommission BETWEEN :minMaxCommission AND :maxMaxCommission AND " +
             "p.price BETWEEN :minPrice AND :maxPrice AND " +
+            "p.maxCommissionPercentage BETWEEN :minMaxCommissionPercentage AND :maxMaxCommissionPercentage AND " +
             "(:currency IS NULL OR :currency = '' OR p.currency = :currency) AND " +
             "(:locale IS NULL OR :locale = '' OR p.locale = :locale) AND " +
             "(:rating IS NULL OR p.rating >= :rating)")
@@ -20,6 +21,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("maxTemperature") Double maxTemperature,
             @Param("minMaxCommission") Double minMaxCommission,
             @Param("maxMaxCommission") Double maxMaxCommission,
+            @Param("minMaxCommissionPercentage") Double minMaxCommissionPercentage,
+            @Param("maxMaxCommissionPercentage") Double maxMaxCommissionPercentage,
             @Param("minPrice") Double minPrice,
             @Param("maxPrice") Double maxPrice,
             @Param("currency") String currency,
