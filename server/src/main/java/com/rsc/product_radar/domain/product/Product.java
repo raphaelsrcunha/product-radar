@@ -48,7 +48,7 @@ public class Product {
     @Column(name = "change_18_days")
     private Double change18Days;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Double rating;
 
     @Column(name = "review_count")

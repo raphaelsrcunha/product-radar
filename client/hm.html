@@ -70,6 +70,13 @@
                                 </span>
                             </div>
                             <div class="filter-container-big">
+                                <p class="filter-container-big-title bold">Preço</p>
+                                <span class="filter-container-big-inputs">
+                                    <input type="number" name="min-price" id="min-price-input" placeholder="Mínimo">
+                                    <input type="number" name="max-price" id="max-price-input" placeholder="Máximo">
+                                </span>
+                            </div>
+                            <div class="filter-container-big">
                                 <p class="filter-container-big-title bold">Comissão</p>
                                 <span class="filter-container-big-inputs">
                                     <input type="number" name="min-commission" id="min-commission-input" placeholder="Mínima">
@@ -77,7 +84,7 @@
                                 </span>
                             </div>
                             <div class="filter-container-big">
-                                <p class="filter-container-big-title bold">Preço</p>
+                                <p class="filter-container-big-title bold">Comissão (%)</p>
                                 <span class="filter-container-big-inputs">
                                     <input type="number" name="min-price" id="min-price-input" placeholder="Mínimo">
                                     <input type="number" name="max-price" id="max-price-input" placeholder="Máximo">
@@ -86,11 +93,17 @@
                         </div>
                         <div class="filter-container-single">
                             <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">Tipo de Comissionamento</p>
-                                <select name="commission-rule-dropdown" id="commission-rule-dropdown">
-                                    <option value="" disabled selected>Comissionamento</option>
-                                    <option value="primeiro-clique">Primeiro clique</option>
-                                    <option value="ultimo-clique">Último clique</option>
+                                <p class="filter-container-small-title bold">Idioma</p>
+                                <select name="locale-dropdown" id="locale-dropdown">
+                                    <option value="0">Escolha o país</option>
+                                    <option value="PT_BR">Português</option>
+                                    <option value="ES">Inglês</option>
+                                    <option value="PT_PT">Português (Portugal)</option>
+                                    <option value="IT">Italiano</option>
+                                    <option value="FR">Francês</option>
+                                    <option value="JA">Japonês</option>
+                                    <option value="DE">Alemão</option>
+                                    <option value="AR">Árabe</option>
                                 </select>
                             </div>
                             <div class="filter-container-small">
@@ -107,16 +120,104 @@
                                 </select>
                             </div>
                             <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">País</p>
-                                <select name="locale-dropdown" id="locale-dropdown">
-                                    <option value="0">Escolha o país</option>
-                                    <option value="PT_BR">Brasil</option>
-                                    <option value="ES">EUA</option>
-                                    <option value="PT_PT">Portugal</option>
+                                <p class="filter-container-small-title bold">Nota Mínima</p>
+                                <select name="rating-dropdown" id="rating-dropdown">
+                                    <option value="0">Escolha</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
                             <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">Idioma</p>
+                                <p class="filter-container-small-title bold">Blueprint mínimo (%)</p>
+                                <select name="language-dropdown" id="language-dropdown">
+                                    <option value="" disabled selected>Escolha o idioma</option>
+                                    <option value="PT_BR">Português (Brasil)</option>
+                                    <option value="EN">Inglês</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="filter-container-single">
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Qtd. mínima de avaliações</p>
+                                <select name="locale-dropdown" id="locale-dropdown">
+                                    <option value="0">Escolha</option>
+                                    <option value="1">1</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Data da última avaliação</p>
+                                <select name="currency-dropdown" id="currency-dropdown">
+                                    <option value="0">Escolha a moeda</option>
+                                    <option value="R$">R$</option>
+                                    <option value="$">$</option>
+                                    <option value="€">€</option>
+                                    <option value="£">£</option>
+                                    <option value="¥">¥</option>
+                                    <option value="ND">ND</option>
+                                    <option value="SFR">SFR</option>
+                                </select>
+                            </div>
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Indisponível para afiliação</p>
+                                <select name="commission-rule-dropdown" id="commission-rule-dropdown">
+                                    <option value="" disabled selected>Comissionamento</option>
+                                    <option value="primeiro-clique">Primeiro clique</option>
+                                    <option value="ultimo-clique">Último clique</option>
+                                </select>
+                            </div>
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Tipo de Comissionamento</p>
+                                <select name="commission-rule-dropdown" id="commission-rule-dropdown">
+                                    <option value="" disabled selected>Comissionamento</option>
+                                    <option value="primeiro-clique">Primeiro clique</option>
+                                    <option value="ultimo-clique">Último clique</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="filter-container-single">
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Nicho</p>
+                                <select name="locale-dropdown" id="locale-dropdown">
+                                    <option value="0">Escolha o país</option>
+                                    <option value="PT_BR">Português</option>
+                                    <option value="ES">Inglês</option>
+                                    <option value="PT_PT">Português (Portugal)</option>
+                                    <option value="IT">Italiano</option>
+                                    <option value="FR">Francês</option>
+                                    <option value="JA">Japonês</option>
+                                    <option value="DE">Alemão</option>
+                                    <option value="AR">Árabe</option>
+                                </select>
+                            </div>
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Tipo de Afiliação</p>
+                                <select name="currency-dropdown" id="currency-dropdown">
+                                    <option value="0">Escolha a moeda</option>
+                                    <option value="R$">R$</option>
+                                    <option value="$">$</option>
+                                    <option value="€">€</option>
+                                    <option value="£">£</option>
+                                    <option value="¥">¥</option>
+                                    <option value="ND">ND</option>
+                                    <option value="SFR">SFR</option>
+                                </select>
+                            </div>
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Hotleads</p>
+                                <select name="commission-rule-dropdown" id="commission-rule-dropdown">
+                                    <option value="" disabled selected>Comissionamento</option>
+                                    <option value="primeiro-clique">Primeiro clique</option>
+                                    <option value="ultimo-clique">Último clique</option>
+                                </select>
+                            </div>
+                            <div class="filter-container-small">
+                                <p class="filter-container-small-title bold">Produtos com recorrência</p>
                                 <select name="language-dropdown" id="language-dropdown">
                                     <option value="" disabled selected>Escolha o idioma</option>
                                     <option value="PT_BR">Português (Brasil)</option>

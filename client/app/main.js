@@ -73,6 +73,7 @@ const currency = document.getElementById('currency-dropdown');
 const commissionRule = document.getElementById('commission-rule-dropdown');
 const locale = document.getElementById('locale-dropdown');
 const language = document.getElementById('language-dropdown');
+const ratingDropdown = document.getElementById('rating-dropdown');
 
 [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput].forEach(input => {
     input.addEventListener('input', updateFilters);
@@ -335,9 +336,9 @@ async function getProducts(page, sortField, sortDirection) {
     const maxMaxCommission = document.getElementById('max-commission-input').value;
     const minPrice = document.getElementById('min-price-input').value;
     const maxPrice = document.getElementById('max-price-input').value;
-    //const locale = document.getElementById('language-dropdown').value;
     const currency = document.getElementById('currency-dropdown').value;
     const locale = document.getElementById('locale-dropdown').value;
+    const rating = document.getElementById('rating-dropdown').value;
 
     const params = new URLSearchParams();
     params.append('page', page);
@@ -355,6 +356,7 @@ async function getProducts(page, sortField, sortDirection) {
     if (maxPrice) params.append('maxPrice', maxPrice);
     if (currency && currency !== "0") params.append('currency', currency);
     if (locale && locale !== "0") params.append('locale', locale);
+    if (rating && rating !== "0") params.append('rating', rating);
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {
@@ -386,6 +388,8 @@ currencyDropdown.addEventListener('change', updateFilters);
 
 const localeDropdown = document.getElementById('locale-dropdown');
 localeDropdown.addEventListener('change', updateFilters);
+
+ratingDropdown.addEventListener('change', updateFilters);
 
 function updatePagination() {
     nextPageButtons.forEach(button => 
@@ -443,6 +447,7 @@ eraseFiltersButton.addEventListener("click", () => {
     });
     document.getElementById('currency-dropdown').value = "0";
     document.getElementById('locale-dropdown').value = "0";
+    document.getElementById('rating-dropdown').value = "0";
     getProducts(1, sortField, sortDirection);
 })
 
@@ -470,7 +475,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //Ícone com a primeira letra do nome no meu superior direito
-iconFirstLetter.textContent = userName[0]; 
-
-
-   
+iconFirstLetter.textContent = userName[0];
