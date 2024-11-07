@@ -21,7 +21,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:hasText IS NULL OR :hasText = '' OR p.productName LIKE %:hasText%) AND " +
             "(:hasntText IS NULL OR :hasntText = '' OR p.productName NOT LIKE %:hasntText%) AND " +
             "(:category IS NULL OR p.category = :category) AND " +
-            "(:format IS NULL OR :format = '' OR p.format = :format)")
+            "(:format IS NULL OR :format = '' OR p.format = :format) AND " +
+            "(:cookieRule IS NULL OR :cookieRule = '' OR p.cookieRule = :cookieRule) AND " +
+            "(:cookieDuration IS NULL OR :cookieDuration = '' OR p.cookieDuration = :cookieDuration) AND " +
+            "(:hotleads IS NULL OR p.hotleads = :hotleads)")
     Page<Product> findWithFilters(
             @Param("minTemperature") Double minTemperature,
             @Param("maxTemperature") Double maxTemperature,
@@ -40,6 +43,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("hasntText") String hasntText,
             @Param("category") String category,
             @Param("format") String format,
+            @Param("cookieRule") String cookieRule,
+            @Param("cookieDuration") String cookieDuration,
+            @Param("hotleads") Boolean hotleads,
             Pageable pageable
     );
 

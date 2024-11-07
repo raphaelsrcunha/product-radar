@@ -82,6 +82,9 @@ const hasTextInput = document.getElementById('has-text');
 const hasntTextInput = document.getElementById('hasnt-text');
 const categoryDropdown = document.getElementById('category-dropdown');
 const formatDropdown = document.getElementById('format-dropdown');
+const cookieRuleDropdown = document.getElementById('cookie-rule-dropdown');
+const cookieDurationDropdown = document.getElementById('cookie-duration-dropdown');
+const hotleadsDropdown = document.getElementById('hotleads-dropdown');
 
 [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput, hasTextInput, hasntTextInput].forEach(input => {
     input.addEventListener('input', updateFilters);
@@ -355,7 +358,9 @@ async function getProducts(page, sortField, sortDirection) {
     const hasntText = document.getElementById('hasnt-text').value;
     const category = document.getElementById('category-dropdown').value;
     const format = document.getElementById('format-dropdown').value;
-
+    const cookieRule = document.getElementById('cookie-rule-dropdown').value;
+    const cookieDuration = document.getElementById('cookie-duration-dropdown').value;
+    const hotleads = document.getElementById('hotleads-dropdown').value;
 
     const params = new URLSearchParams();
     params.append('page', page);
@@ -382,6 +387,9 @@ async function getProducts(page, sortField, sortDirection) {
     if(hasntText) params.append('hasntText', hasntText);
     if (category && category !== "0") params.append('category', category);
     if (format && format !== "0") params.append('format', format);
+    if (cookieRule && cookieRule !== "0") params.append('cookieRule', cookieRule);
+    if (cookieDuration && cookieDuration !== "0") params.append('cookieDuration', cookieDuration);
+    if (hotleads && hotleads !== "0") params.append('hotleads', hotleads);
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {
@@ -418,6 +426,9 @@ blueprintDropdown.addEventListener('change', updateFilters);
 minRatingsDropdown.addEventListener('change', updateFilters);
 categoryDropdown.addEventListener('change', updateFilters);
 formatDropdown.addEventListener('change', updateFilters);
+cookieRuleDropdown.addEventListener('change', updateFilters);
+cookieDurationDropdown.addEventListener('change', updateFilters);
+hotleadsDropdown.addEventListener('change', updateFilters);
 
 function updatePagination() {
     nextPageButtons.forEach(button => 
@@ -477,6 +488,9 @@ eraseFiltersButton.addEventListener("click", () => {
     minRatingsDropdown.value = "0";
     categoryDropdown.value = "0";
     formatDropdown.value = "0";
+    cookieRuleDropdown.value = "0";
+    cookieDurationDropdown.value = "0";
+    hotleadsDropdown.value = "0";
     getProducts(1, sortField, sortDirection);
 })
 

@@ -42,13 +42,16 @@ public class ProductController {
             @RequestParam(required = false) String hasText,
             @RequestParam(required = false) String hasntText,
             @RequestParam(required = false) String category,
-            @RequestParam(required = false) String format) {
+            @RequestParam(required = false) String format,
+            @RequestParam(required = false) String cookieRule,
+            @RequestParam(required = false) String cookieDuration,
+            @RequestParam(required = false) Boolean hotleads) {
 
         Sort sortOrder = Sort.by(Sort.Direction.fromString(direction != null ? direction : "asc"), sort != null ? sort : "id");
         Pageable pageable = PageRequest.of(page, size, sortOrder);
         Page<Product> products = productService.getFilteredProducts(pageable, minTemperature, maxTemperature, minMaxCommission, maxMaxCommission,
                 minMaxCommissionPercentage, maxMaxCommissionPercentage, minPrice, maxPrice, currency, locale, rating, blueprint, reviewCount,
-                hasText, hasntText, category, format);
+                hasText, hasntText, category, format, cookieRule, cookieDuration, hotleads);
         return ResponseEntity.ok(products);
     }
 
