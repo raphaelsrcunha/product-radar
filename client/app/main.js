@@ -78,8 +78,12 @@ const minMaxCommissionPercentageInput = document.getElementById('min-max-commiss
 const maxMaxCommissionPercentageInput = document.getElementById('max-max-commission-percentage');
 const blueprintDropdown = document.getElementById('blueprint-dropdown');
 const minRatingsDropdown = document.getElementById('min-ratings-dropdown');
+const hasTextInput = document.getElementById('has-text');
+const hasntTextInput = document.getElementById('hasnt-text');
+const categoryDropdown = document.getElementById('category-dropdown');
+const formatDropdown = document.getElementById('format-dropdown');
 
-[minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput].forEach(input => {
+[minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput, hasTextInput, hasntTextInput].forEach(input => {
     input.addEventListener('input', updateFilters);
 });
 
@@ -347,6 +351,10 @@ async function getProducts(page, sortField, sortDirection) {
     const maxMaxCommissionPercentage = document.getElementById('max-max-commission-percentage').value;
     const blueprint = document.getElementById('blueprint-dropdown').value;
     const minRatings = document.getElementById('min-ratings-dropdown').value;
+    const hasText = document.getElementById('has-text').value;
+    const hasntText = document.getElementById('hasnt-text').value;
+    const category = document.getElementById('category-dropdown').value;
+    const format = document.getElementById('format-dropdown').value;
 
 
     const params = new URLSearchParams();
@@ -370,6 +378,10 @@ async function getProducts(page, sortField, sortDirection) {
     if (maxMaxCommissionPercentage) params.append('maxMaxCommissionPercentage', maxMaxCommissionPercentage);
     if (blueprint && blueprint !== "0") params.append('blueprint', blueprint);
     if (minRatings && minRatings !== "0") params.append('reviewCount', minRatings);
+    if(hasText) params.append('hasText', hasText);
+    if(hasntText) params.append('hasntText', hasntText);
+    if (category && category !== "0") params.append('category', category);
+    if (format && format !== "0") params.append('format', format);
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {
@@ -393,7 +405,7 @@ async function getProducts(page, sortField, sortDirection) {
     )
 
     showProducts(products);
-    updatePagination(); // Atualiza informações de paginação
+    updatePagination(); 
 }
 
 const currencyDropdown = document.getElementById('currency-dropdown');
@@ -401,12 +413,11 @@ currencyDropdown.addEventListener('change', updateFilters);
 
 const localeDropdown = document.getElementById('locale-dropdown');
 localeDropdown.addEventListener('change', updateFilters);
-
 ratingDropdown.addEventListener('change', updateFilters);
-
 blueprintDropdown.addEventListener('change', updateFilters);
-
 minRatingsDropdown.addEventListener('change', updateFilters);
+categoryDropdown.addEventListener('change', updateFilters);
+formatDropdown.addEventListener('change', updateFilters);
 
 function updatePagination() {
     nextPageButtons.forEach(button => 
@@ -456,7 +467,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 eraseFiltersButton.addEventListener("click", () => {
-    [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, locale, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput].forEach(input => {
+    [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, locale, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput, hasTextInput, hasntTextInput].forEach(input => {
         input.value = "";
     });
     document.getElementById('currency-dropdown').value = "0";
@@ -464,6 +475,8 @@ eraseFiltersButton.addEventListener("click", () => {
     document.getElementById('rating-dropdown').value = "0";
     blueprintDropdown.value = "0";
     minRatingsDropdown.value = "0";
+    categoryDropdown.value = "0";
+    formatDropdown.value = "0";
     getProducts(1, sortField, sortDirection);
 })
 

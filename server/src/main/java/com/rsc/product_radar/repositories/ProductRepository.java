@@ -17,7 +17,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:locale IS NULL OR :locale = '' OR p.locale = :locale) AND " +
             "(:rating IS NULL OR p.rating >= :rating) AND " +
             "(:blueprint IS NULL OR p.blueprint >= :blueprint) AND " +
-            "(:reviewCount IS NULL OR p.reviewCount >= :reviewCount)")
+            "(:reviewCount IS NULL OR p.reviewCount >= :reviewCount) AND " +
+            "(:hasText IS NULL OR :hasText = '' OR p.productName LIKE %:hasText%) AND " +
+            "(:hasntText IS NULL OR :hasntText = '' OR p.productName NOT LIKE %:hasntText%) AND " +
+            "(:category IS NULL OR p.category = :category) AND " +
+            "(:format IS NULL OR :format = '' OR p.format = :format)")
     Page<Product> findWithFilters(
             @Param("minTemperature") Double minTemperature,
             @Param("maxTemperature") Double maxTemperature,
@@ -32,6 +36,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("rating") Double rating,
             @Param("blueprint") Double blueprint,
             @Param("reviewCount") Integer reviewCount,
+            @Param("hasText") String hasText,
+            @Param("hasntText") String hasntText,
+            @Param("category") String category,
+            @Param("format") String format,
             Pageable pageable
     );
+
 }

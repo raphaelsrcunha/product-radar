@@ -239,7 +239,7 @@ main {
 }
 
 .collapsible-content.open {
-    max-height: 400px; /* Ajuste conforme necessário para o conteúdo */
+    max-height: 800px; /* Ajuste conforme necessário para o conteúdo */
 }
 
 .collapsible-content-inside {
@@ -262,7 +262,7 @@ main {
 }
 
 input {
-    width: 49%;
+    width: 100%;
     padding: 8px 16px;
     background-color: var(--secondary-color);
     border: none;
