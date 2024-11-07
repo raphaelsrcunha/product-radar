@@ -16,7 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:currency IS NULL OR :currency = '' OR p.currency = :currency) AND " +
             "(:locale IS NULL OR :locale = '' OR p.locale = :locale) AND " +
             "(:rating IS NULL OR p.rating >= :rating) AND " +
-            "(:blueprint IS NULL OR p.blueprint >= :blueprint)")
+            "(:blueprint IS NULL OR p.blueprint >= :blueprint) AND " +
+            "(:reviewCount IS NULL OR p.reviewCount >= :reviewCount)")
     Page<Product> findWithFilters(
             @Param("minTemperature") Double minTemperature,
             @Param("maxTemperature") Double maxTemperature,
@@ -30,6 +31,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("locale") String locale,
             @Param("rating") Double rating,
             @Param("blueprint") Double blueprint,
+            @Param("reviewCount") Integer reviewCount,
             Pageable pageable
     );
 }

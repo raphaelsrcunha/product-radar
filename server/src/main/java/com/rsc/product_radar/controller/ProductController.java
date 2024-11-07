@@ -37,11 +37,12 @@ public class ProductController {
             @RequestParam(required = false) String currency,
             @RequestParam(required = false) String locale,
             @RequestParam(required = false) Double rating,
-            @RequestParam(required = false) Double blueprint) {
+            @RequestParam(required = false) Double blueprint,
+            @RequestParam(required = false) Integer reviewCount) {
 
         Sort sortOrder = Sort.by(Sort.Direction.fromString(direction != null ? direction : "asc"), sort != null ? sort : "id");
         Pageable pageable = PageRequest.of(page, size, sortOrder);
-        Page<Product> products = productService.getFilteredProducts(pageable, minTemperature, maxTemperature, minMaxCommission, maxMaxCommission, minMaxCommissionPercentage, maxMaxCommissionPercentage, minPrice, maxPrice, currency, locale, rating, blueprint);
+        Page<Product> products = productService.getFilteredProducts(pageable, minTemperature, maxTemperature, minMaxCommission, maxMaxCommission, minMaxCommissionPercentage, maxMaxCommissionPercentage, minPrice, maxPrice, currency, locale, rating, blueprint, reviewCount);
         return ResponseEntity.ok(products);
     }
 

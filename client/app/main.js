@@ -77,6 +77,7 @@ const ratingDropdown = document.getElementById('rating-dropdown');
 const minMaxCommissionPercentageInput = document.getElementById('min-max-commission-percentage');
 const maxMaxCommissionPercentageInput = document.getElementById('max-max-commission-percentage');
 const blueprintDropdown = document.getElementById('blueprint-dropdown');
+const minRatingsDropdown = document.getElementById('min-ratings-dropdown');
 
 [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput].forEach(input => {
     input.addEventListener('input', updateFilters);
@@ -345,6 +346,8 @@ async function getProducts(page, sortField, sortDirection) {
     const minMaxCommissionPercentage = document.getElementById('min-max-commission-percentage').value;
     const maxMaxCommissionPercentage = document.getElementById('max-max-commission-percentage').value;
     const blueprint = document.getElementById('blueprint-dropdown').value;
+    const minRatings = document.getElementById('min-ratings-dropdown').value;
+
 
     const params = new URLSearchParams();
     params.append('page', page);
@@ -366,6 +369,7 @@ async function getProducts(page, sortField, sortDirection) {
     if (minMaxCommissionPercentage) params.append('minMaxCommissionPercentage', minMaxCommissionPercentage);
     if (maxMaxCommissionPercentage) params.append('maxMaxCommissionPercentage', maxMaxCommissionPercentage);
     if (blueprint && blueprint !== "0") params.append('blueprint', blueprint);
+    if (minRatings && minRatings !== "0") params.append('reviewCount', minRatings);
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {
@@ -401,6 +405,8 @@ localeDropdown.addEventListener('change', updateFilters);
 ratingDropdown.addEventListener('change', updateFilters);
 
 blueprintDropdown.addEventListener('change', updateFilters);
+
+minRatingsDropdown.addEventListener('change', updateFilters);
 
 function updatePagination() {
     nextPageButtons.forEach(button => 
@@ -449,9 +455,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-
-
-
 eraseFiltersButton.addEventListener("click", () => {
     [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, locale, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput].forEach(input => {
         input.value = "";
@@ -460,6 +463,7 @@ eraseFiltersButton.addEventListener("click", () => {
     document.getElementById('locale-dropdown').value = "0";
     document.getElementById('rating-dropdown').value = "0";
     blueprintDropdown.value = "0";
+    minRatingsDropdown.value = "0";
     getProducts(1, sortField, sortDirection);
 })
 
