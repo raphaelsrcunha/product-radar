@@ -12,14 +12,14 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public Page<Product> getFilteredProducts(Pageable pageable, Double minTemperature, Double maxTemperature,
-                                             Double minMaxCommission, Double maxMaxCommission, Double minMaxCommissionPercentage, Double maxMaxCommissionPercentage, Double minPrice, Double maxPrice, String currency, String locale, Double rating) {
+                                             Double minMaxCommission, Double maxMaxCommission, Double minMaxCommissionPercentage, Double maxMaxCommissionPercentage, Double minPrice, Double maxPrice, String currency, String locale, Double rating, Double blueprint) {
 
         String currencyFilter = (currency == null || currency.trim().isEmpty()) ? "" : currency;
         String localeFilter = (locale == null || locale.trim().isEmpty()) ? "" : locale;
 
         return productRepository.findWithFilters(
                 minTemperature, maxTemperature, minMaxCommission, maxMaxCommission, minMaxCommissionPercentage, maxMaxCommissionPercentage,
-                minPrice, maxPrice, currencyFilter, localeFilter, rating, pageable
+                minPrice, maxPrice, currencyFilter, localeFilter, rating, blueprint, pageable
         );
     }
 }

@@ -76,6 +76,7 @@ const language = document.getElementById('language-dropdown');
 const ratingDropdown = document.getElementById('rating-dropdown');
 const minMaxCommissionPercentageInput = document.getElementById('min-max-commission-percentage');
 const maxMaxCommissionPercentageInput = document.getElementById('max-max-commission-percentage');
+const blueprintDropdown = document.getElementById('blueprint-dropdown');
 
 [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput].forEach(input => {
     input.addEventListener('input', updateFilters);
@@ -343,6 +344,7 @@ async function getProducts(page, sortField, sortDirection) {
     const rating = document.getElementById('rating-dropdown').value;
     const minMaxCommissionPercentage = document.getElementById('min-max-commission-percentage').value;
     const maxMaxCommissionPercentage = document.getElementById('max-max-commission-percentage').value;
+    const blueprint = document.getElementById('blueprint-dropdown').value;
 
     const params = new URLSearchParams();
     params.append('page', page);
@@ -363,7 +365,7 @@ async function getProducts(page, sortField, sortDirection) {
     if (rating && rating !== "0") params.append('rating', rating);
     if (minMaxCommissionPercentage) params.append('minMaxCommissionPercentage', minMaxCommissionPercentage);
     if (maxMaxCommissionPercentage) params.append('maxMaxCommissionPercentage', maxMaxCommissionPercentage);
-
+    if (blueprint && blueprint !== "0") params.append('blueprint', blueprint);
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {
@@ -397,6 +399,8 @@ const localeDropdown = document.getElementById('locale-dropdown');
 localeDropdown.addEventListener('change', updateFilters);
 
 ratingDropdown.addEventListener('change', updateFilters);
+
+blueprintDropdown.addEventListener('change', updateFilters);
 
 function updatePagination() {
     nextPageButtons.forEach(button => 
@@ -455,6 +459,7 @@ eraseFiltersButton.addEventListener("click", () => {
     document.getElementById('currency-dropdown').value = "0";
     document.getElementById('locale-dropdown').value = "0";
     document.getElementById('rating-dropdown').value = "0";
+    blueprintDropdown.value = "0";
     getProducts(1, sortField, sortDirection);
 })
 
