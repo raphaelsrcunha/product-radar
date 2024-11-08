@@ -87,12 +87,13 @@ const cookieRuleDropdown = document.getElementById('cookie-rule-dropdown');
 const cookieDurationDropdown = document.getElementById('cookie-duration-dropdown');
 const hotleadsDropdown = document.getElementById('hotleads-dropdown');
 const recurringDropdown = document.getElementById('recurring-dropdown');
+const affiliationRuleDropdown = document.getElementById('affiliation-rule-dropdown');
 
 const inputs = [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, 
     maxMaxCommissionPercentageInput, hasTextInput, hasntTextInput];
 
 const dropdowns = [currencyDropdown, commissionRuleDropdown, localeDropdown, ratingDropdown, blueprintDropdown, minRatingsDropdown, categoryDropdown, formatDropdown, 
-    cookieRuleDropdown, cookieDurationDropdown, hotleadsDropdown, recurringDropdown];
+    cookieRuleDropdown, cookieDurationDropdown, hotleadsDropdown, recurringDropdown, affiliationRuleDropdown];
 
 inputs.forEach(input => {
     input.addEventListener('input', updateFilters);
@@ -371,6 +372,7 @@ async function getProducts(page, sortField, sortDirection) {
     const cookieDuration = document.getElementById('cookie-duration-dropdown').value;
     const hotleads = document.getElementById('hotleads-dropdown').value;
     const recurring = document.getElementById('recurring-dropdown').value;
+    const affiliationRule = document.getElementById('affiliation-rule-dropdown').value;
 
     const params = new URLSearchParams();
     params.append('page', page);
@@ -403,6 +405,7 @@ async function getProducts(page, sortField, sortDirection) {
     if (cookieDuration && cookieDuration !== "0") params.append('cookieDuration', cookieDuration);
     if (hotleads && hotleads !== "0") params.append('hotleads', hotleads);
     if (recurring && recurring !== "0") params.append('recurring', recurring);
+    if (affiliationRule && affiliationRule != "0") params.append('affiliationRule', affiliationRule);
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {

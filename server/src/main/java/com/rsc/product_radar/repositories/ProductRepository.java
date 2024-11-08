@@ -25,7 +25,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "(:cookieRule IS NULL OR :cookieRule = '' OR p.cookieRule = :cookieRule) AND " +
             "(:cookieDuration IS NULL OR :cookieDuration = '' OR p.cookieDuration = :cookieDuration) AND " +
             "(:hotleads IS NULL OR p.hotleads = :hotleads) AND " +
-            "(:recurring IS NULL OR p.recurring = :recurring)")
+            "(:recurring IS NULL OR p.recurring = :recurring) AND " +
+            "(:affiliationRule IS NULL OR :affiliationRule = '' OR p.affiliationRule = :affiliationRule)")
     Page<Product> findWithFilters(
             @Param("minTemperature") Double minTemperature,
             @Param("maxTemperature") Double maxTemperature,
@@ -48,6 +49,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("cookieDuration") String cookieDuration,
             @Param("hotleads") Boolean hotleads,
             @Param("recurring") Boolean recurring,
+            @Param("affiliationRule") String affiliationRule,
             Pageable pageable
     );
 
