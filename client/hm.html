@@ -66,21 +66,21 @@
                                 <p class="filter-container-big-title bold">Temperatura</p>
                                 <span class="filter-container-big-inputs">
                                     <input type="text" name="min-temperature" id="min-temperature-input" placeholder="Mínima">
-                                    <input type="number" name="max-temperature" id="max-temperature-input" placeholder="Máxima">
+                                    <input type="text" name="max-temperature" id="max-temperature-input" placeholder="Máxima">
                                 </span>
                             </div>
                             <div class="filter-container-big">
                                 <p class="filter-container-big-title bold">Preço</p>
                                 <span class="filter-container-big-inputs">
-                                    <input type="number" name="min-price" id="min-price-input" placeholder="Mínimo">
-                                    <input type="number" name="max-price" id="max-price-input" placeholder="Máximo">
+                                    <input type="text" name="min-price" id="min-price-input" placeholder="Mínimo">
+                                    <input type="text" name="max-price" id="max-price-input" placeholder="Máximo">
                                 </span>
                             </div>
                             <div class="filter-container-big">
                                 <p class="filter-container-big-title bold">Comissão</p>
                                 <span class="filter-container-big-inputs">
-                                    <input type="number" name="min-commission" id="min-commission-input" placeholder="Mínima">
-                                    <input type="number" name="max-commission" id="max-commission-input" placeholder="Máxima">
+                                    <input type="text" name="min-commission" id="min-commission-input" placeholder="Mínima">
+                                    <input type="text" name="max-commission" id="max-commission-input" placeholder="Máxima">
                                 </span>
                             </div>
                         </div>
@@ -88,8 +88,8 @@
                             <div class="filter-container-big">
                                 <p class="filter-container-big-title bold">Comissão (%)</p>
                                 <span class="filter-container-big-inputs">
-                                    <input type="number" name="min-max-commission-percentage" id="min-max-commission-percentage" placeholder="Mínimo">
-                                    <input type="number" name="max-max-commission-percentage" id="max-max-commission-percentage" placeholder="Máximo">
+                                    <input type="text" name="min-max-commission-percentage" id="min-max-commission-percentage" placeholder="Mínimo">
+                                    <input type="text" name="max-max-commission-percentage" id="max-max-commission-percentage" placeholder="Máximo">
                                 </span>
                             </div>
                             <div class="filter-container-big">
@@ -182,32 +182,34 @@
                                     <option value="Ebooks, Documentos">Ebooks, Documentos</option>
                                     <option value="Evento Online">Evento Online</option>
                                     <option value="Imagens, ícones, fotos">Imagens, ícones, fotos</option>
-                                    <option value="Ingressos para eventos">Ingressos para eventos</option>
+                                    <option value="Números de Série, Cupons de Desconto">Números de Série, Cupons de Desconto</option>
+                                    <option value="Screencasts, filmes, clipes">Screencasts, filmes, clipes</option>
+                                    <option value="Serviço Online">Serviço Online</option>
+                                    <option value="Software">Software</option>
+                                    <option value="Templates, Código-Fonte">Templates, Código-Fonte</option>
                                 </select>
                             </div>
                             <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">Data da última avaliação (AJUSTAR)</p>
-                                <select name="currency-dropdown" id="currency-dropdown">
-                                    <option value="0">Escolha a moeda</option>
-                                    <option value="R$">R$</option>
-                                    <option value="$">$</option>
-                                    <option value="€">€</option>
-                                    <option value="£">£</option>
-                                    <option value="¥">¥</option>
-                                    <option value="ND">ND</option>
-                                    <option value="SFR">SFR</option>
+                                <p class="filter-container-small-title bold">Regra de Cookie</p>
+                                <select name="cookie-rule-dropdown" id="cookie-rule-dropdown">
+                                    <option value="0">Escolha a regra do cookie</option>
+                                    <option value="Cookie por múltiplos cliques">Cookie por múltiplos cliques</option>
+                                    <option value="Cookie por último clique">Cookie por último clique</option>
+                                    <option value="Cookie por primeiro clique">Cookie por primeiro clique</option>
                                 </select>
                             </div>
                             <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">Indisponível para afiliação (AJUSTAR)</p>
-                                <select name="-dropdown" id="-dropdown">
-                                    <option value="" disabled selected>Comissionamento</option>
-                                    <option value="primeiro-clique">Primeiro clique</option>
-                                    <option value="ultimo-clique">Último clique</option>
+                                <p class="filter-container-small-title bold">Duração do cookie</p>
+                                <select name="cookie-duration-dropdown" id="cookie-duration-dropdown">
+                                    <option value="0">Escolha a duração do cookie</option>
+                                    <option value="Cookie 60 dias">Cookie 60 dias</option>
+                                    <option value="Cookie 90 dias">Cookie 90 dias</option>
+                                    <option value="Cookie 180 dias">Cookie 180 dias</option>
+                                    <option value="Cookie eterno">Cookie eterno</option>
                                 </select>
                             </div>
                             <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">Regra de Comissionamento (AJUSTAR)</p>
+                                <p class="filter-container-small-title bold">Regra de Comissionamento**</p>
                                 <select name="commission-rule-dropdown" id="commission-rule-dropdown">
                                     <option value="0">Escolha a regra de comissionamento</option>
                                     <option value="primeiro-clique">Primeiro clique</option>
@@ -269,43 +271,6 @@
                                     <option value="0">Recorrência</option>
                                     <option value="TRUE">Sim</option>
                                     <option value="FALSE">Não</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="filter-container-single">
-                            <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">Regra de Cookie</p>
-                                <select name="cookie-rule-dropdown" id="cookie-rule-dropdown">
-                                    <option value="0">Escolha a regra do cookie</option>
-                                    <option value="Cookie por múltiplos cliques">Cookie por múltiplos cliques</option>
-                                    <option value="Cookie por último clique">Cookie por último clique</option>
-                                    <option value="Cookie por primeiro clique">Cookie por primeiro clique</option>
-                                </select>
-                            </div>
-                            <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">Duração do cookie</p>
-                                <select name="cookie-duration-dropdown" id="cookie-duration-dropdown">
-                                    <option value="0">Escolha a duração do cookie</option>
-                                    <option value="Cookie 60 dias">Cookie 60 dias</option>
-                                    <option value="Cookie 90 dias">Cookie 90 dias</option>
-                                    <option value="Cookie 180 dias">Cookie 180 dias</option>
-                                    <option value="Cookie eterno">Cookie eterno</option>
-                                </select>
-                            </div>
-                            <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">A DEFINIR</p>
-                                <select name="-dropdown" id="-dropdown">
-                                    <option value="" disabled selected>Comissionamento</option>
-                                    <option value="primeiro-clique">Primeiro clique</option>
-                                    <option value="ultimo-clique">Último clique</option>
-                                </select>
-                            </div>
-                            <div class="filter-container-small">
-                                <p class="filter-container-small-title bold">A DEFINIR</p>
-                                <select name="language-dropdown" id="language-dropdown">
-                                    <option value="" disabled selected>Escolha o idioma</option>
-                                    <option value="PT_BR">Português (Brasil)</option>
-                                    <option value="EN">Inglês</option>
                                 </select>
                             </div>
                         </div>

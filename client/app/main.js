@@ -489,6 +489,10 @@ eraseFiltersButton.addEventListener("click", () => {
         dropdown.value = "0";
     })
 
+    //Close FILTERS when click o erase filters
+    document.querySelector(".collapsible").classList.toggle("active");
+    document.querySelector(".collapsible-content").classList.toggle("open");;    
+
     getProducts(1, sortField, sortDirection);
 })
 
