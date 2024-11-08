@@ -62,24 +62,25 @@ const updateFilters = debounce(() => {
     getProducts(currentPage, sortField, sortDirection);
 }, 800);
 
-// Adiciona eventos de input aos campos de filtro
+
 const minTemperatureInput = document.getElementById('min-temperature-input');
 const maxTemperatureInput = document.getElementById('max-temperature-input');
 const minCommissionInput = document.getElementById('min-commission-input');
 const maxCommissionInput = document.getElementById('max-commission-input');
 const minPriceInput = document.getElementById('min-price-input');
 const maxPriceInput = document.getElementById('max-price-input');
-const currencyDropdown = document.getElementById('currency-dropdown');
-const commissionRule = document.getElementById('commission-rule-dropdown');
-const localeDropdown = document.getElementById('locale-dropdown');
-const language = document.getElementById('language-dropdown');
-const ratingDropdown = document.getElementById('rating-dropdown');
 const minMaxCommissionPercentageInput = document.getElementById('min-max-commission-percentage');
 const maxMaxCommissionPercentageInput = document.getElementById('max-max-commission-percentage');
-const blueprintDropdown = document.getElementById('blueprint-dropdown');
-const minRatingsDropdown = document.getElementById('min-ratings-dropdown');
 const hasTextInput = document.getElementById('has-text');
 const hasntTextInput = document.getElementById('hasnt-text');
+
+const currencyDropdown = document.getElementById('currency-dropdown');
+const commissionRuleDropdown = document.getElementById('commission-rule-dropdown');
+const localeDropdown = document.getElementById('locale-dropdown');
+const languageDropdown = document.getElementById('language-dropdown');
+const ratingDropdown = document.getElementById('rating-dropdown');
+const blueprintDropdown = document.getElementById('blueprint-dropdown');
+const minRatingsDropdown = document.getElementById('min-ratings-dropdown');
 const categoryDropdown = document.getElementById('category-dropdown');
 const formatDropdown = document.getElementById('format-dropdown');
 const cookieRuleDropdown = document.getElementById('cookie-rule-dropdown');
@@ -87,11 +88,17 @@ const cookieDurationDropdown = document.getElementById('cookie-duration-dropdown
 const hotleadsDropdown = document.getElementById('hotleads-dropdown');
 const recurringDropdown = document.getElementById('recurring-dropdown');
 
-[minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput, hasTextInput, hasntTextInput].forEach(input => {
+const inputs = [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, 
+    maxMaxCommissionPercentageInput, hasTextInput, hasntTextInput];
+
+const dropdowns = [currencyDropdown, commissionRuleDropdown, localeDropdown, ratingDropdown, blueprintDropdown, minRatingsDropdown, categoryDropdown, formatDropdown, 
+    cookieRuleDropdown, cookieDurationDropdown, hotleadsDropdown, recurringDropdown];
+
+inputs.forEach(input => {
     input.addEventListener('input', updateFilters);
 });
 
-[currencyDropdown, localeDropdown, ratingDropdown, blueprintDropdown, minRatingsDropdown, categoryDropdown, formatDropdown, cookieRuleDropdown, cookieDurationDropdown, hotleadsDropdown, recurringDropdown].forEach(dropdown => {
+dropdowns.forEach(dropdown => {
     dropdown.addEventListener('change', updateFilters);
 })
 
@@ -331,9 +338,6 @@ function showProducts(products) {
     });
 }
 
-//country.addEventListener('change', updateFilters);
-//currency.addEventListener('change', getProducts);
-
 orderingDropdown.addEventListener('change', () => {
     currentPage = 0;
     selectedOption = orderingDropdown.value.split('-');
@@ -350,15 +354,17 @@ async function getProducts(page, sortField, sortDirection) {
     const maxMaxCommission = document.getElementById('max-commission-input').value;
     const minPrice = document.getElementById('min-price-input').value;
     const maxPrice = document.getElementById('max-price-input').value;
-    const currency = document.getElementById('currency-dropdown').value;
-    const locale = document.getElementById('locale-dropdown').value;
-    const rating = document.getElementById('rating-dropdown').value;
     const minMaxCommissionPercentage = document.getElementById('min-max-commission-percentage').value;
     const maxMaxCommissionPercentage = document.getElementById('max-max-commission-percentage').value;
-    const blueprint = document.getElementById('blueprint-dropdown').value;
-    const minRatings = document.getElementById('min-ratings-dropdown').value;
     const hasText = document.getElementById('has-text').value;
     const hasntText = document.getElementById('hasnt-text').value;
+    
+    const currency = document.getElementById('currency-dropdown').value;
+    const commissionRule = document.getElementById('commission-rule-dropdown').value;
+    const locale = document.getElementById('locale-dropdown').value;
+    const rating = document.getElementById('rating-dropdown').value;
+    const blueprint = document.getElementById('blueprint-dropdown').value;
+    const minRatings = document.getElementById('min-ratings-dropdown').value;
     const category = document.getElementById('category-dropdown').value;
     const format = document.getElementById('format-dropdown').value;
     const cookieRule = document.getElementById('cookie-rule-dropdown').value;
@@ -380,15 +386,17 @@ async function getProducts(page, sortField, sortDirection) {
     if (maxMaxCommission) params.append('maxMaxCommission', maxMaxCommission);
     if (minPrice) params.append('minPrice', minPrice);
     if (maxPrice) params.append('maxPrice', maxPrice);
-    if (currency && currency !== "0") params.append('currency', currency);
-    if (locale && locale !== "0") params.append('locale', locale);
-    if (rating && rating !== "0") params.append('rating', rating);
     if (minMaxCommissionPercentage) params.append('minMaxCommissionPercentage', minMaxCommissionPercentage);
     if (maxMaxCommissionPercentage) params.append('maxMaxCommissionPercentage', maxMaxCommissionPercentage);
-    if (blueprint && blueprint !== "0") params.append('blueprint', blueprint);
-    if (minRatings && minRatings !== "0") params.append('reviewCount', minRatings);
     if(hasText) params.append('hasText', hasText);
     if(hasntText) params.append('hasntText', hasntText);
+    
+    if (currency && currency !== "0") params.append('currency', currency);
+    if (commissionRule && commissionRule !== "0") params.append('commissionRule', commissionRule);
+    if (locale && locale !== "0") params.append('locale', locale);
+    if (rating && rating !== "0") params.append('rating', rating);
+    if (blueprint && blueprint !== "0") params.append('blueprint', blueprint);
+    if (minRatings && minRatings !== "0") params.append('reviewCount', minRatings);
     if (category && category !== "0") params.append('category', category);
     if (format && format !== "0") params.append('format', format);
     if (cookieRule && cookieRule !== "0") params.append('cookieRule', cookieRule);
@@ -469,19 +477,15 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 eraseFiltersButton.addEventListener("click", () => {
-    [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, locale, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput, hasTextInput, hasntTextInput].forEach(input => {
+
+    inputs.forEach(input => {
         input.value = "";
     });
-    document.getElementById('currency-dropdown').value = "0";
-    document.getElementById('locale-dropdown').value = "0";
-    document.getElementById('rating-dropdown').value = "0";
-    blueprintDropdown.value = "0";
-    minRatingsDropdown.value = "0";
-    categoryDropdown.value = "0";
-    formatDropdown.value = "0";
-    cookieRuleDropdown.value = "0";
-    cookieDurationDropdown.value = "0";
-    hotleadsDropdown.value = "0";
+
+    dropdowns.forEach(dropdown => {
+        dropdown.value = "0";
+    })
+
     getProducts(1, sortField, sortDirection);
 })
 
