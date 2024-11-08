@@ -15,7 +15,7 @@ public class ProductService {
                                              Double minMaxCommission, Double maxMaxCommission, Double minMaxCommissionPercentage,
                                              Double maxMaxCommissionPercentage, Double minPrice, Double maxPrice, String currency,
                                              String locale, Double rating, Double blueprint, Integer reviewCount, String hasText, String hasntText,
-                                             String category, String format, String cookieRule, String cookieDuration, Boolean hotleads) {
+                                             String category, String format, String cookieRule, String cookieDuration, Boolean hotleads, Boolean recurring) {
 
         String currencyFilter = (currency == null || currency.trim().isEmpty()) ? "" : currency;
         String localeFilter = (locale == null || locale.trim().isEmpty()) ? "" : locale;
@@ -23,7 +23,7 @@ public class ProductService {
         return productRepository.findWithFilters(
                 minTemperature, maxTemperature, minMaxCommission, maxMaxCommission, minMaxCommissionPercentage, maxMaxCommissionPercentage,
                 minPrice, maxPrice, currencyFilter, localeFilter, rating, blueprint, reviewCount, hasText, hasntText, category, format,
-                cookieRule, cookieDuration, hotleads, pageable
+                cookieRule, cookieDuration, hotleads, recurring, pageable
         );
     }
 }

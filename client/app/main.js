@@ -69,9 +69,9 @@ const minCommissionInput = document.getElementById('min-commission-input');
 const maxCommissionInput = document.getElementById('max-commission-input');
 const minPriceInput = document.getElementById('min-price-input');
 const maxPriceInput = document.getElementById('max-price-input');
-const currency = document.getElementById('currency-dropdown');
+const currencyDropdown = document.getElementById('currency-dropdown');
 const commissionRule = document.getElementById('commission-rule-dropdown');
-const locale = document.getElementById('locale-dropdown');
+const localeDropdown = document.getElementById('locale-dropdown');
 const language = document.getElementById('language-dropdown');
 const ratingDropdown = document.getElementById('rating-dropdown');
 const minMaxCommissionPercentageInput = document.getElementById('min-max-commission-percentage');
@@ -85,12 +85,15 @@ const formatDropdown = document.getElementById('format-dropdown');
 const cookieRuleDropdown = document.getElementById('cookie-rule-dropdown');
 const cookieDurationDropdown = document.getElementById('cookie-duration-dropdown');
 const hotleadsDropdown = document.getElementById('hotleads-dropdown');
+const recurringDropdown = document.getElementById('recurring-dropdown');
 
 [minTemperatureInput, maxTemperatureInput, minCommissionInput, maxCommissionInput, minPriceInput, maxPriceInput, minMaxCommissionPercentageInput, maxMaxCommissionPercentageInput, hasTextInput, hasntTextInput].forEach(input => {
     input.addEventListener('input', updateFilters);
 });
 
-
+[currencyDropdown, localeDropdown, ratingDropdown, blueprintDropdown, minRatingsDropdown, categoryDropdown, formatDropdown, cookieRuleDropdown, cookieDurationDropdown, hotleadsDropdown, recurringDropdown].forEach(dropdown => {
+    dropdown.addEventListener('change', updateFilters);
+})
 
 function showProducts(products) {
     productsContainer.innerHTML = "";
@@ -361,6 +364,7 @@ async function getProducts(page, sortField, sortDirection) {
     const cookieRule = document.getElementById('cookie-rule-dropdown').value;
     const cookieDuration = document.getElementById('cookie-duration-dropdown').value;
     const hotleads = document.getElementById('hotleads-dropdown').value;
+    const recurring = document.getElementById('recurring-dropdown').value;
 
     const params = new URLSearchParams();
     params.append('page', page);
@@ -390,6 +394,7 @@ async function getProducts(page, sortField, sortDirection) {
     if (cookieRule && cookieRule !== "0") params.append('cookieRule', cookieRule);
     if (cookieDuration && cookieDuration !== "0") params.append('cookieDuration', cookieDuration);
     if (hotleads && hotleads !== "0") params.append('hotleads', hotleads);
+    if (recurring && recurring !== "0") params.append('recurring', recurring);
  
     const res = await fetch(`${endpointAPI}?${params.toString()}`, {
         headers: {
@@ -415,20 +420,6 @@ async function getProducts(page, sortField, sortDirection) {
     showProducts(products);
     updatePagination(); 
 }
-
-const currencyDropdown = document.getElementById('currency-dropdown');
-currencyDropdown.addEventListener('change', updateFilters);
-
-const localeDropdown = document.getElementById('locale-dropdown');
-localeDropdown.addEventListener('change', updateFilters);
-ratingDropdown.addEventListener('change', updateFilters);
-blueprintDropdown.addEventListener('change', updateFilters);
-minRatingsDropdown.addEventListener('change', updateFilters);
-categoryDropdown.addEventListener('change', updateFilters);
-formatDropdown.addEventListener('change', updateFilters);
-cookieRuleDropdown.addEventListener('change', updateFilters);
-cookieDurationDropdown.addEventListener('change', updateFilters);
-hotleadsDropdown.addEventListener('change', updateFilters);
 
 function updatePagination() {
     nextPageButtons.forEach(button => 
