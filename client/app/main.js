@@ -167,7 +167,7 @@ function showProducts(products) {
                             <p class="product-maximum-price"><b>Preço máximo do produto:</b> ${product.currency} ${product.price.toFixed(2)}</p>
                             <p class="product-maximum-comission"><b>Comissão máxima:</b> ${product.currency} ${product.maxCommission} (${product.maxCommissionPercentage}%)</p>
                             
-                            <p class="popup-button" product-id="${product.id}">Mais informações</p>
+                            <p class="popup-button" product-id="${product.id}">Links úteis</p>
                             <div id="popup-${product.id}" class="popup" style="display: none;">
                                 <div class="popup-content">
                                     <span class="popup-content-header">
