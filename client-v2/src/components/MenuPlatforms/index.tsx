@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import logoHotmart from '../../resources/hotmart_logo.svg';
+import logoKiwify from '../../resources/kiwify-logo.png';
 import styles from './MenuPlatforms.module.css';
 
 export default function MenuPlatforms() {
@@ -9,7 +10,7 @@ export default function MenuPlatforms() {
 
             <div className={styles.gridContainer}>
                 <Link to="/clickbank"><div className={styles.gridItem}><img src={logoHotmart} alt=""/></div></Link>
-                <Link to=""><div className={styles.gridItem}><img src={logoHotmart} alt=""/></div></Link>
+                <Link to=""><div className={styles.gridItem}><img src={logoKiwify} alt=""/></div></Link>
                 <Link to=""><div className={styles.gridItem}><img src={logoHotmart} alt=""/></div></Link>
                 <Link to=""><div className={styles.gridItem}><img src={logoHotmart} alt=""/></div></Link>
                 <Link to=""><div className={styles.gridItem}><img src={logoHotmart} alt=""/></div></Link>

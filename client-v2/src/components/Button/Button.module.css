@@ -1,0 +1,16 @@
+.button {
+    background-color: var(--green-medium);
+    color: var(--black);
+    border: 1px solid var(--primary-color);
+    position: relative;
+    text-align: center;
+    padding: 10px;  
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    margin-left: 10px;
+}
+
+.button:hover {
+    background-color: var(--green-light);
+}
