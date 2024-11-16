@@ -1,0 +1,8 @@
+.container {
+    height: auto;
+    background-color: var(--dark-charcoal);
+    padding: 30px;
+    border-radius: 10px;
+    width: 58%;
+    text-align: center;
+}

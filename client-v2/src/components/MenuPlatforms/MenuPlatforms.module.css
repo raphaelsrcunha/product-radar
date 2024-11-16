@@ -1,0 +1,43 @@
+.containerAds {
+    height: auto;
+    background-color: var(--dark-charcoal);
+    padding: 30px;
+    border-radius: 10px;
+    width: 20%;
+    text-align: center;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    grid-template-rows: repeat(5, 100px);
+    gap: 10px; /* Espaçamento entre as imagens */
+    justify-content: center; /* Centraliza a grid horizontalmente */
+    padding: 20px; /* Espaçamento interno */
+}
+
+.gridContainer a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gridItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 80%;
+}
+
+.gridItem img {
+    width: 130px;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorção */
+}
+
+.gridItem:hover {
+    background-color: white;
+    border-radius: 20px;
+    width: 140px;
+}

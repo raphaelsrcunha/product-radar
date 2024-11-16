@@ -1,0 +1,39 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 75px;
+    background-color: rgb(23, 29, 31);
+    padding: 0 15px;
+    border-radius: 0 0 10px 10px;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    max-height: 80%;
+}
+
+.logoText {
+    font-size: 30px;
+    color: var(--white);
+}
+
+.headerRight {
+    display: flex;
+    align-items: center;
+}
+
+.headerRight__firstLetter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    background-color: var(--white);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+}

@@ -1,0 +1,8 @@
+.containerAds {
+    height: auto;
+    background-color: var(--dark-charcoal);
+    padding: 30px;
+    border-radius: 10px;
+    width: 20%;
+    text-align: center;
+}
