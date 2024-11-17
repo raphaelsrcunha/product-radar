@@ -43,6 +43,11 @@
 .productName {
     margin-top: 5px;
     font-size: 1.3em;
+    text-align: left;
+}
+
+.productAuthor{
+    text-align: left;
 }
 
 .productInfos__header__right {

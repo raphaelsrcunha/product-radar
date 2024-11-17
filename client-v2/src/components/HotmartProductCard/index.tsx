@@ -1,21 +1,27 @@
 import styles from './HotmartProductCard.module.css'
+import iconFavorite from '../../resources/favorite.svg'
+import iconStar from '../../resources/star.svg'
+import iconBlueprint from '../../resources/blueprint.svg'
+import iconFire from '../../resources/fire.svg'
+import img from '../../resources/product.jpg'
+import Button from '../Button'
 
 export default function HotmartProductCard() {
     return (
         <div className={styles.productCard}>
                 
             <div className={styles.productContainer__image}>
-                <img className={styles.imgProduct} src='' alt=''/>
+                <img className={styles.imgProduct} src={img} alt=''/>
             </div>
             
             <div className={styles.productInfos}>
                 <div className={styles.productInfos__header}>
                     <div className={styles.productInfos__header__left}>
                         <h2 className={styles.productName}>Nome do Produto</h2>
-                        <p className={styles.productAuthor}><a href="#">Nome do Produtor</a></p>
+                        <p className={styles.productAuthor}>Nome do Produtor</p>
                     </div>
                     <div className={styles.productInfos__header__right}>
-                        <img src="./resources/favorite.svg" alt=""/>
+                        <img src={iconFavorite} alt=""/>
                     </div>
                 </div>
                 <div className={styles.productContainerBody}>
@@ -23,24 +29,23 @@ export default function HotmartProductCard() {
                         <p className="product-category">Categoria do Produto</p>
                         <div className={styles.productMetrics}>
                             <div className={styles.productMetrics__stars}>                            
-                                <img src="./resources/star.svg" alt=""/>
+                                <img src={iconStar} alt=""/>
                                 <p>4.3</p>
                                 <p>(412 avaliações)</p>
                             </div>
                             <div className={styles.productMetrics__temperature}>
-                                <img src="./resources/fire.svg" alt=""/>
+                                <img src={iconFire} alt=""/>
                                 <p>(65)</p>
                             </div>
                             <div className={styles.productMetrics__blueprint}>
-                                <img src="./resources/blueprint.svg" alt=""/>
+                                <img src={iconBlueprint} alt=""/>
                                 <p>(65%)</p>
                             </div>
                         </div>
                         <p className="product-maximum-price"><b>Preço máximo do produto:</b> R$ 65,35</p>
                         <p className="product-maximum-comission"><b>Comissão máxima:</b> R$ 56 (85%)</p>
                         
-                        <p className="popup-button" product-id="${product.id}">Links úteis</p>
-                        
+                        <Button text='Links úteis' width={150}/>
                         
                         <div id="popup-${product.id}" className="popup" style={{display: 'none'}}>
                             <div className="popup-content">

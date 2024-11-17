@@ -26,6 +26,10 @@ li {
   list-style: none;
 }
 
+p {
+  text-align: left;
+}
+
 body {
   margin: 0;
   font-family: "Roboto Flex", sans-serif;
